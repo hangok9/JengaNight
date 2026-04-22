@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jenga Neon Night - 120 Retos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Librería para generar el PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-red: #ff0055;
+            --neon-yellow: #ffcc00;
+            --neon-green: #33ff00;
+            --neon-blue: #00ccff;
+            --neon-purple: #cc00ff;
+            --neon-pink: #ff00cc;
+        }
+
+        body {
+            background-color: #050505;
+            color: #e0e0e0;
+            font-family: 'Rajdhani', sans-serif;
+            overflow-x: hidden;
+        }
+
+        h1, h2, .neon-text {
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .neon-border-red { border: 2px solid var(--neon-red); box-shadow: 0 0 10px var(--neon-red), inset 0 0 5px var(--neon-red); }
+        .neon-border-yellow { border: 2px solid var(--neon-yellow); box-shadow: 0 0 10px var(--neon-yellow), inset 0 0 5px var(--neon-yellow); }
+        .neon-border-green { border: 2px solid var(--neon-green); box-shadow: 0 0 10px var(--neon-green), inset 0 0 5px var(--neon-green); }
+        .neon-border-blue { border: 2px solid var(--neon-blue); box-shadow: 0 0 10px var(--neon-blue), inset 0 0 5px var(--neon-blue); }
+        .neon-border-purple { border: 2px solid var(--neon-purple); box-shadow: 0 0 10px var(--neon-purple), inset 0 0 5px var(--neon-purple); }
+        .neon-border-pink { border: 2px solid var(--neon-pink); box-shadow: 0 0 10px var(--neon-pink), inset 0 0 5px var(--neon-pink); }
+
+        .glow-red { text-shadow: 0 0 10px var(--neon-red); color: var(--neon-red); }
+        .glow-yellow { text-shadow: 0 0 10px var(--neon-yellow); color: var(--neon-yellow); }
+        .glow-green { text-shadow: 0 0 10px var(--neon-green); color: var(--neon-green); }
+        .glow-blue { text-shadow: 0 0 10px var(--neon-blue); color: var(--neon-blue); }
+        .glow-purple { text-shadow: 0 0 10px var(--neon-purple); color: var(--neon-purple); }
+        .glow-pink { text-shadow: 0 0 10px var(--neon-pink); color: var(--neon-pink); }
+
+        .btn-neon {
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(5px);
+        }
+
+        .btn-neon:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .random-overlay {
+            background: rgba(0, 0, 0, 0.95);
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Estilos PDF (Inyectados en el generador) */
+        .pdf-section {
+            padding: 20px;
+            background-color: #050505;
+            color: #ffffff;
+            width: 100%;
+            box-sizing: border-box;
+            print-color-adjust: exact;
+        }
+        .page-break {
+            page-break-after: always;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8 flex flex-col min-h-screen">
+
+    <div class="max-w-5xl mx-auto flex-grow">
+        <!-- Header -->
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-6xl font-bold mb-2 tracking-tighter italic" style="text-shadow: 0 0 20px #fff, 0 0 30px var(--neon-blue);">
+                JENGA NIGHT
+            </h1>
+            <p class="text-gray-400 uppercase tracking-widest text-sm">120 Retos • Edición Neón</p>
+        </header>
+
+        <!-- Main Controls -->
+        <div class="flex flex-wrap justify-center gap-4 mb-12">
+            <button onclick="showRandom()" class="btn-neon neon-border-blue px-12 py-4 rounded-full text-2xl font-bold uppercase hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(0,204,255,0.3)]">
+                ⚡ Reto Aleatorio ⚡
+            </button>
+        </div>
+
+        <!-- Category Filters -->
+        <div class="flex flex-wrap justify-center gap-2 mb-10">
+            <button onclick="filter('all')" class="px-4 py-2 rounded border border-gray-700 hover:bg-gray-800 transition">Todos</button>
+            <button onclick="filter('rojo')" class="px-4 py-2 rounded border border-red-900 text-red-400 hover:bg-red-950 transition">Rojo</button>
+            <button onclick="filter('amarillo')" class="px-4 py-2 rounded border border-yellow-900 text-yellow-400 hover:bg-yellow-950 transition">Amarillo</button>
+            <button onclick="filter('verde')" class="px-4 py-2 rounded border border-green-900 text-green-400 hover:bg-green-950 transition">Verde</button>
+            <button onclick="filter('azul')" class="px-4 py-2 rounded border border-blue-900 text-blue-400 hover:bg-blue-950 transition">Azul</button>
+            <button onclick="filter('morado')" class="px-4 py-2 rounded border border-purple-900 text-purple-400 hover:bg-purple-950 transition">Morado</button>
+            <button onclick="filter('rosa')" class="px-4 py-2 rounded border border-pink-900 text-pink-400 hover:bg-pink-950 transition">Rosa</button>
+        </div>
+
+        <!-- NEW SECTION: Castigos Torre -->
+        <div id="fall-penalties-wrapper" class="mb-12 bg-gray-900/40 border border-red-900/50 rounded-xl p-6 shadow-[0_0_20px_rgba(255,0,85,0.15)]">
+            <h2 class="text-2xl md:text-3xl font-bold mb-2 text-center text-red-500 glow-red">💥 SI LA TORRE CAE 💥</h2>
+            <p class="text-center text-gray-400 mb-8 text-sm uppercase tracking-widest">El castigo depende del bloque que tiró la torre</p>
+            <div id="fall-penalties-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Dynamically populated -->
+            </div>
+        </div>
+
+        <!-- Challenges Grid -->
+        <div id="challenges-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
+            <!-- Dynamically populated -->
+        </div>
+    </div>
+
+    <!-- Footer con botón medio escondido -->
+    <footer class="mt-auto py-8 text-center">
+        <p id="download-btn" class="text-gray-800 text-[10px] uppercase tracking-tighter transition-all hover:text-gray-500 cursor-default select-none" onclick="downloadPDF()" title="Shhh...">
+            v1.2.1 • night_mode_enabled • <span class="cursor-pointer hover:underline">sys_export_log_pdf</span>
+        </p>
+    </footer>
+
+    <!-- Random Modal -->
+    <div id="random-modal" class="random-overlay" onclick="closeModal()">
+        <div class="max-w-lg w-full p-8 rounded-2xl text-center relative animate-pulse shadow-2xl" id="modal-content">
+            <p id="modal-category" class="text-sm uppercase tracking-widest mb-4 font-bold"></p>
+            <h2 id="modal-text" class="text-3xl md:text-4xl font-bold leading-tight mb-8"></h2>
+            <button class="px-6 py-2 bg-white text-black font-bold rounded uppercase">Tocar para cerrar</button>
+        </div>
+    </div>
+
+    <script>
+        const fallPenalties = [
+            { color: 'rojo', cat: 'Rojo (Spicy)', title: 'El Strip-Tease', text: 'Tienes que quedarte en ropa interior (o menos, si os sentís atrevidos) durante lo que tardeis en reconstuirlo o guardar.', glow: 'glow-red', hex: '#ff0055' },
+            { color: 'amarillo', cat: 'Amarillo (Mental)', title: 'El Bloqueo', text: 'No puedes usar el móvil ni ver ninguna pantalla durante el resto de la noche. Solo charla, música o mirar las estrellas.', glow: 'glow-yellow', hex: '#ffcc00' },
+            { color: 'verde', cat: 'Verde (Acción)', title: 'La Estatua', text: 'Tienes que quedarte en la posición más incómoda que elija tu pareja durante 2 minutos seguidos sin mover ni un músculo.', glow: 'glow-green', hex: '#33ff00' },
+            { color: 'azul', cat: 'Azul (Confesiones)', title: 'El Pasado Vuelve', text: 'Tienes que contar la historia más vergonzosa de tu vida que nunca le hayas contado (esa que te da cosa hasta pensarla). Si no se te ocurre, tienes que subir la foto con tu pareja que tu pareja escoja A LA PUBLICA, A LA NORMAL.', glow: 'glow-blue', hex: '#00ccff' },
+            { color: 'morado', cat: 'Morado (Pareja)', title: 'La Promesa de Oro', text: 'Tienes que comprometerte a un plan que tu pareja elija para el mes que viene (un viaje, una cena cara, una visita a los suegros...) y no puedes decir que no.', glow: 'glow-purple', hex: '#cc00ff' },
+            { color: 'rosa', cat: 'Rosa (Sorpresa)', title: 'El Limpiador Total', text: 'Te toca hacer la maleta de los dos cuando os vayáis de la residencia.', glow: 'glow-pink', hex: '#ff00cc' }
+        ];
+
+        const challenges = [
+            // ROJO
+            { color: 'rojo', cat: 'Spicy (Pasión)', text: 'Beso apasionado de película (mínimo 30 segundos).', border: 'neon-border-red', glow: 'glow-red' },
+            { color: 'rojo', cat: 'Spicy (Pasión)', text: 'Quítale una prenda a tu pareja sin usar las manos (solo la boca).', border: 'neon-border-red', glow: 'glow-red' },
+            { color: 'rojo', cat: 'Spicy (Pasión)', text: 'Véndale los ojos y recórrele el cuello o el brazo con un cubito de hielo.', border: 'neon-border-red', glow: 'glow-red' },
+            { color: 'rojo', cat: 'Spicy (Pasión)', text: 'Susúrrale al oído con todo lujo de detalles tu fantasía más recurrente.', border: 'neon-border-red', glow: 'glow-red' },
+            { color: 'rojo', cat: 'Spicy (Pasión)', text: 'Hazle un masaje de 5 minutos en la zona que tu pareja elija.', border: 'neon-border-red', glow: 'glow-red' },
+            { color: 'rojo', cat: 'Spicy (Pasión)', text: 'Dale un beso en el lugar más inesperado y sensible que se te ocurra.', border: 'neon-border-red', glow: 'glow-red' },
+            { color: 'rojo', cat: 'Spicy (Pasión)', text: 'Hazle un lap dance (baile sensual) improvisado de 1 minuto.', border: 'neon-border-red', glow: 'glow-red' },
+            { color: 'rojo', cat: 'Spicy (Pasión)', text: 'Véndate los ojos, tu pareja guiará tus manos y tú debes adivinar qué parte estás tocando.', border: 'neon-border-red', glow: 'glow-red' },
+            { color: 'rojo', cat: 'Spicy (Pasión)', text: 'Besa el cuello de tu pareja de forma provocativa durante 40 segundos.', border: 'neon-border-red', glow: 'glow-red' },
+            { color: 'rojo', cat: 'Spicy (Pasión)', text: 'Tienes que estar tocando el muslo o la mano de tu pareja bajo la mesa durante los próximos 3 turnos.', border: 'neon-border-red', glow: 'glow-red' },
+            { color: 'rojo', cat: 'Spicy (Pasión)', text: 'Puntuación: del 1 al 10, evalúa el último beso que te ha dado y dile cómo subir a un 10.', border: 'neon-border-red', glow: 'glow-red' },
+            { color: 'rojo', cat: 'Spicy (Pasión)', text: 'Da pequeños mordiscos juguetones en el lóbulo de la oreja de tu pareja.', border: 'neon-border-red', glow: 'glow-red' },
+            { color: 'rojo', cat: 'Spicy (Pasión)', text: 'Simula vuestro primer beso, pero haciéndolo súper exagerado y apasionado.', border: 'neon-border-red', glow: 'glow-red' },
+            { color: 'rojo', cat: 'Spicy (Pasión)', text: 'Recorre su espalda con la punta de tus dedos (cosquillitas suaves) durante 2 minutos.', border: 'neon-border-red', glow: 'glow-red' },
+            { color: 'rojo', cat: 'Spicy (Pasión)', text: 'Mantened el contacto visual sin apartar la mirada mientras os acariciáis las manos 1 min.', border: 'neon-border-red', glow: 'glow-red' },
+            { color: 'rojo', cat: 'Spicy (Pasión)', text: 'Cuéntale qué detalle físico suyo te vuelve completamente loco/a.', border: 'neon-border-red', glow: 'glow-red' },
+            { color: 'rojo', cat: 'Spicy (Pasión)', text: 'Dale de comer algo (una fresa, chocolate) de forma muy sensual.', border: 'neon-border-red', glow: 'glow-red' },
+            { color: 'rojo', cat: 'Spicy (Pasión)', text: 'Mete las manos por debajo de su camiseta y abrázale hasta tu próximo turno.', border: 'neon-border-red', glow: 'glow-red' },
+            { color: 'rojo', cat: 'Spicy (Pasión)', text: 'Recrea la postura en la que os quedáis dormidos abrazados en el sofá.', border: 'neon-border-red', glow: 'glow-red' },
+            { color: 'rojo', cat: 'Spicy (Pasión)', text: 'Elige qué ropa interior quieres que lleve tu pareja mañana (o esta noche).', border: 'neon-border-red', glow: 'glow-red' },
+
+            // AMARILLO
+            { color: 'amarillo', cat: 'Mental (Trivia)', text: 'Di el abecedario al revés empezando desde la "M". Tienes 15 segundos.', border: 'neon-border-yellow', glow: 'glow-yellow' },
+            { color: 'amarillo', cat: 'Mental (Trivia)', text: 'Nombra 5 películas donde actúe Leonardo DiCaprio.', border: 'neon-border-yellow', glow: 'glow-yellow' },
+            { color: 'amarillo', cat: 'Mental (Trivia)', text: 'Canta el estribillo de una canción que tenga la palabra "Amor" (o "Love").', border: 'neon-border-yellow', glow: 'glow-yellow' },
+            { color: 'amarillo', cat: 'Mental (Trivia)', text: 'Di 5 capitales de países africanos.', border: 'neon-border-yellow', glow: 'glow-yellow' },
+            { color: 'amarillo', cat: 'Mental (Trivia)', text: 'Inventa un haiku (poema corto) sobre el Jenga en menos de 1 minuto.', border: 'neon-border-yellow', glow: 'glow-yellow' },
+            { color: 'amarillo', cat: 'Mental (Trivia)', text: 'Nombra 3 ingredientes obligatorios para hacer una paella valenciana de verdad.', border: 'neon-border-yellow', glow: 'glow-yellow' },
+            { color: 'amarillo', cat: 'Mental (Trivia)', text: 'Deletrea la palabra "Esternocleidomastoideo" sin equivocarte.', border: 'neon-border-yellow', glow: 'glow-yellow' },
+            { color: 'amarillo', cat: 'Mental (Trivia)', text: 'Di el nombre de los 4 integrantes de The Beatles.', border: 'neon-border-yellow', glow: 'glow-yellow' },
+            { color: 'amarillo', cat: 'Mental (Trivia)', text: 'Nombra 5 marcas de coches japoneses.', border: 'neon-border-yellow', glow: 'glow-yellow' },
+            { color: 'amarillo', cat: 'Mental (Trivia)', text: 'Resuelve esto en 5 segundos: ¿Cuánto es 12 x 7?', border: 'neon-border-yellow', glow: 'glow-yellow' },
+            { color: 'amarillo', cat: 'Mental (Trivia)', text: 'Dime 4 series que hayamos visto enteros juntos.', border: 'neon-border-yellow', glow: 'glow-yellow' },
+            { color: 'amarillo', cat: 'Mental (Trivia)', text: 'Di 5 cosas rojas que haya en esta habitación en menos de 10 segundos.', border: 'neon-border-yellow', glow: 'glow-yellow' },
+            { color: 'amarillo', cat: 'Mental (Trivia)', text: 'Di un trabalenguas clásico sin trabarte.', border: 'neon-border-yellow', glow: 'glow-yellow' },
+            { color: 'amarillo', cat: 'Mental (Trivia)', text: 'Nombra 3 países que empiecen por la letra "E".', border: 'neon-border-yellow', glow: 'glow-yellow' },
+            { color: 'amarillo', cat: 'Mental (Trivia)', text: '¿Cuál es la película más taquillera de la historia? (Avatar).', border: 'neon-border-yellow', glow: 'glow-yellow' },
+            { color: 'amarillo', cat: 'Mental (Trivia)', text: 'Di 3 palabras que rimen con "Residencia".', border: 'neon-border-yellow', glow: 'glow-yellow' },
+            { color: 'amarillo', cat: 'Mental (Trivia)', text: 'Adivina qué número del 1 al 50 estoy pensando. (3 intentos).', border: 'neon-border-yellow', glow: 'glow-yellow' },
+            { color: 'amarillo', cat: 'Mental (Trivia)', text: 'Nombra los planetas del sistema solar en orden desde el Sol.', border: 'neon-border-yellow', glow: 'glow-yellow' },
+            { color: 'amarillo', cat: 'Mental (Trivia)', text: 'Adivina a qué famoso estoy imitando (solo con la voz).', border: 'neon-border-yellow', glow: 'glow-yellow' },
+            { color: 'amarillo', cat: 'Mental (Trivia)', text: 'Juega a "Piedra, papel, tijera" al mejor de 3. El que pierda hace un reto verde.', border: 'neon-border-yellow', glow: 'glow-yellow' },
+
+            // VERDE
+            { color: 'verde', cat: 'Acción (Diversión)', text: 'Haz 15 sentadillas ahora mismo.', border: 'neon-border-green', glow: 'glow-green' },
+            { color: 'verde', cat: 'Acción (Diversión)', text: 'Camina a la pata coja por la habitación haciendo ruidos de gallina.', border: 'neon-border-green', glow: 'glow-green' },
+            { color: 'verde', cat: 'Acción (Diversión)', text: 'Intenta chuparte el codo durante 30 segundos.', border: 'neon-border-green', glow: 'glow-green' },
+            { color: 'verde', cat: 'Acción (Diversión)', text: 'Ponte un calcetín en la mano y úsalo como marioneta durante 2 turnos.', border: 'neon-border-green', glow: 'glow-green' },
+            { color: 'verde', cat: 'Acción (Diversión)', text: 'Haz el pino apoyado en la pared y aguanta 5 segundos.', border: 'neon-border-green', glow: 'glow-green' },
+            { color: 'verde', cat: 'Acción (Diversión)', text: 'Gira sobre ti mismo 10 veces e intenta caminar en línea recta.', border: 'neon-border-green', glow: 'glow-green' },
+            { color: 'verde', cat: 'Acción (Diversión)', text: 'Haz la croqueta rodando de un extremo al otro de la habitación.', border: 'neon-border-green', glow: 'glow-green' },
+            { color: 'verde', cat: 'Acción (Diversión)', text: 'Habla con acento argentino hasta tu próximo turno.', border: 'neon-border-green', glow: 'glow-green' },
+            { color: 'verde', cat: 'Acción (Diversión)', text: 'Mantén una cuchara en equilibrio sobre tu nariz durante 10 segundos.', border: 'neon-border-green', glow: 'glow-green' },
+            { color: 'verde', cat: 'Acción (Diversión)', text: 'Pon tu ropa del revés y quédate así el resto del juego.', border: 'neon-border-green', glow: 'glow-green' },
+            { color: 'verde', cat: 'Acción (Diversión)', text: 'Lleva a tu pareja a caballito hasta la cocina y volved.', border: 'neon-border-green', glow: 'glow-green' },
+            { color: 'verde', cat: 'Acción (Diversión)', text: 'Baila "La Macarena" sin música y con la mayor energía posible.', border: 'neon-border-green', glow: 'glow-green' },
+            { color: 'verde', cat: 'Acción (Diversión)', text: 'Intenta hacer malabares con 3 calcetines enrollados.', border: 'neon-border-green', glow: 'glow-green' },
+            { color: 'verde', cat: 'Acción (Diversión)', text: 'Túmbate en el suelo y haz 10 abdominales mientras tu pareja cuenta.', border: 'neon-border-green', glow: 'glow-green' },
+            { color: 'verde', cat: 'Acción (Diversión)', text: 'Habla con la lengua fuera cada vez que te toque hablar (5 mins).', border: 'neon-border-green', glow: 'glow-green' },
+            { color: 'verde', cat: 'Acción (Diversión)', text: 'Imita la forma de caminar y de expresarse de tu pareja.', border: 'neon-border-green', glow: 'glow-green' },
+            { color: 'verde', cat: 'Acción (Diversión)', text: 'Hazte un peinado ridículo y no te lo quites hasta acabar.', border: 'neon-border-green', glow: 'glow-green' },
+            { color: 'verde', cat: 'Acción (Diversión)', text: 'Canta como un cantante de ópera cualquier frase normal.', border: 'neon-border-green', glow: 'glow-green' },
+            { color: 'verde', cat: 'Acción (Diversión)', text: 'Equilibrio sobre un pie, con ojos cerrados, 45 segundos.', border: 'neon-border-green', glow: 'glow-green' },
+            { color: 'verde', cat: 'Acción (Diversión)', text: 'Usa solo los codos para intentar mover el siguiente bloque de Jenga.', border: 'neon-border-green', glow: 'glow-green' },
+
+            // AZUL
+            { color: 'azul', cat: 'Confesiones (Conectar)', text: 'Confiesa algo que rompiste o estropeaste y nunca dijiste a nadie.', border: 'neon-border-blue', glow: 'glow-blue' },
+            { color: 'azul', cat: 'Confesiones (Conectar)', text: '¿Qué es lo que más te estresa de tu rutina diaria y cómo podría ayudarte?', border: 'neon-border-blue', glow: 'glow-blue' },
+            { color: 'azul', cat: 'Confesiones (Conectar)', text: 'Si pudieras chasquear los dedos y dominar un talento, ¿cuál sería?', border: 'neon-border-blue', glow: 'glow-blue' },
+            { color: 'azul', cat: 'Confesiones (Conectar)', text: 'Cuéntame un miedo irracional que tengas.', border: 'neon-border-blue', glow: 'glow-blue' },
+            { color: 'azul', cat: 'Confesiones (Conectar)', text: '¿Qué es lo más amable que alguien ha hecho por ti en tu vida?', border: 'neon-border-blue', glow: 'glow-blue' },
+            { color: 'azul', cat: 'Confesiones (Conectar)', text: 'Si mañana ganaras la lotería, ¿cuál es la primera tontería que comprarías?', border: 'neon-border-blue', glow: 'glow-blue' },
+            { color: 'azul', cat: 'Confesiones (Conectar)', text: '¿Cuál es el sueño más extraño o perturbador que recuerdas?', border: 'neon-border-blue', glow: 'glow-blue' },
+            { color: 'azul', cat: 'Confesiones (Conectar)', text: 'Dime una opinión impopular que defiendas a muerte.', border: 'neon-border-blue', glow: 'glow-blue' },
+            { color: 'azul', cat: 'Confesiones (Conectar)', text: 'Si tuvieras que comer solo una comida de por vida, ¿cuál elegirías?', border: 'neon-border-blue', glow: 'glow-blue' },
+            { color: 'azul', cat: 'Confesiones (Conectar)', text: '¿Qué es algo que te encanta hacer pero te da vergüenza admitir?', border: 'neon-border-blue', glow: 'glow-blue' },
+            { color: 'azul', cat: 'Confesiones (Conectar)', text: 'Si pudieras cenar con cualquier personaje histórico, ¿cuél sería?', border: 'neon-border-blue', glow: 'glow-blue' },
+            { color: 'azul', cat: 'Confesiones (Conectar)', text: '¿Qué es lo que más te tranquiliza cuando tienes un día horrible?', border: 'neon-border-blue', glow: 'glow-blue' },
+            { color: 'azul', cat: 'Confesiones (Conectar)', text: '¿Cuál es tu recuerdo de la infancia más feliz?', border: 'neon-border-blue', glow: 'glow-blue' },
+            { color: 'azul', cat: 'Confesiones (Conectar)', text: '¿Qué es lo que consideras tu mayor logro hasta ahora?', border: 'neon-border-blue', glow: 'glow-blue' },
+            { color: 'azul', cat: 'Confesiones (Conectar)', text: 'Si pudieras viajar al pasado para darte un consejo, ¿qué te dirías?', border: 'neon-border-blue', glow: 'glow-blue' },
+            { color: 'azul', cat: 'Confesiones (Conectar)', text: 'Dime una canción que te ponga los pelos de punta siempre.', border: 'neon-border-blue', glow: 'glow-blue' },
+            { color: 'azul', cat: 'Confesiones (Conectar)', text: '¿Qué talento inútil tienes que casi nadie sabe?', border: 'neon-border-blue', glow: 'glow-blue' },
+            { color: 'azul', cat: 'Confesiones (Conectar)', text: 'Si pudieras vivir dentro de una película o serie, ¿cuál elegirías?', border: 'neon-border-blue', glow: 'glow-blue' },
+            { color: 'azul', cat: 'Confesiones (Conectar)', text: 'Confiesa cuál fue tu primera obsesión de la adolescencia.', border: 'neon-border-blue', glow: 'glow-blue' },
+            { color: 'azul', cat: 'Confesiones (Conectar)', text: 'Hazme el cumplido más honesto y profundo que se te ocurra ahora.', border: 'neon-border-blue', glow: 'glow-blue' },
+
+            // MORADO
+            { color: 'morado', cat: 'Pareja (Historia)', text: 'Recrea en 30 segundos, actuando, cómo fue el día que nos conocimos.', border: 'neon-border-purple', glow: 'glow-purple' },
+            { color: 'morado', cat: 'Pareja (Historia)', text: '¿Qué es lo que más te llamó la atención de mí la primera vez?', border: 'neon-border-purple', glow: 'glow-purple' },
+            { color: 'morado', cat: 'Pareja (Historia)', text: 'De todas las escapadas juntos, ¿cuál es tu favorita?', border: 'neon-border-purple', glow: 'glow-purple' },
+            { color: 'morado', cat: 'Pareja (Historia)', text: 'Confiesa: ¿qué manía mía te vuelve loco/a (para bien)?', border: 'neon-border-purple', glow: 'glow-purple' },
+            { color: 'morado', cat: 'Pareja (Historia)', text: 'Confiesa: ¿qué manía mía te saca de quicio pero aguantas?', border: 'neon-border-purple', glow: 'glow-purple' },
+            { color: 'morado', cat: 'Pareja (Historia)', text: '¿Cuál es tu foto favorita de los dos? Enséñamela.', border: 'neon-border-purple', glow: 'glow-purple' },
+            { color: 'morado', cat: 'Pareja (Historia)', text: 'Si fuérais a un concurso de TV, ¿a cuál iríais y por qué?', border: 'neon-border-purple', glow: 'glow-purple' },
+            { color: 'morado', cat: 'Pareja (Historia)', text: '¿Qué tradición de pareja crees que deberíamos empezar ya?', border: 'neon-border-purple', glow: 'glow-purple' },
+            { color: 'morado', cat: 'Pareja (Historia)', text: 'Recuerda un momento en el que no podíamos parar de reír.', border: 'neon-border-purple', glow: 'glow-purple' },
+            { color: 'morado', cat: 'Pareja (Historia)', text: '¿En qué momento exacto supiste que te enamorabas de mí?', border: 'neon-border-purple', glow: 'glow-purple' },
+            { color: 'morado', cat: 'Pareja (Historia)', text: '¿Qué es lo más loco que te gustaría que hiciéramos juntos?', border: 'neon-border-purple', glow: 'glow-purple' },
+            { color: 'morado', cat: 'Pareja (Historia)', text: 'Dime cuál ha sido la cita más romántica que recuerdas.', border: 'neon-border-purple', glow: 'glow-purple' },
+            { color: 'morado', cat: 'Pareja (Historia)', text: 'Si fuéramos una pareja famosa, ¿quiénes seríamos?', border: 'neon-border-purple', glow: 'glow-purple' },
+            { color: 'morado', cat: 'Pareja (Historia)', text: 'Nombra una broma interna nuestra que nadie más entiende.', border: 'neon-border-purple', glow: 'glow-purple' },
+            { color: 'morado', cat: 'Pareja (Historia)', text: '¿Cómo te imaginas un sábado cualquiera dentro de 10 años?', border: 'neon-border-purple', glow: 'glow-purple' },
+            { color: 'morado', cat: 'Pareja (Historia)', text: '¿Qué es lo que más te admiras de mi forma de ser?', border: 'neon-border-purple', glow: 'glow-purple' },
+            { color: 'morado', cat: 'Pareja (Historia)', text: '¿Qué canción crees que define perfectamente nuestra relación?', border: 'neon-border-purple', glow: 'glow-purple' },
+            { color: 'morado', cat: 'Pareja (Historia)', text: 'Recuerda el peor regalo que nos hayamos hecho y ríete.', border: 'neon-border-purple', glow: 'glow-purple' },
+            { color: 'morado', cat: 'Pareja (Historia)', text: '¿Cuál es el lugar del mundo al que mueres por ir conmigo?', border: 'neon-border-purple', glow: 'glow-purple' },
+            { color: 'morado', cat: 'Pareja (Historia)', text: 'Mírame a los ojos y dime qué es lo que más te gusta de nosotros.', border: 'neon-border-purple', glow: 'glow-purple' },
+
+            // ROSA
+            { color: 'rosa', cat: 'Sorpresas y Castigos', text: 'Te toca preparar el desayuno para los dos mañana.', border: 'neon-border-pink', glow: 'glow-pink' },
+            { color: 'rosa', cat: 'Sorpresas y Castigos', text: 'Mañana te encargas de fregar y recoger todos los platos.', border: 'neon-border-pink', glow: 'glow-pink' },
+            { color: 'rosa', cat: 'Sorpresas y Castigos', text: 'Comodín: Vale por un Masaje de 15 min cuando tú quieras.', border: 'neon-border-pink', glow: 'glow-pink' },
+            { color: 'rosa', cat: 'Sorpresas y Castigos', text: 'Sorpresa: Ganas decidir qué película se ve esta noche.', border: 'neon-border-pink', glow: 'glow-pink' },
+            { color: 'rosa', cat: 'Sorpresas y Castigos', text: 'Comodín: Pásale tu turno a tu pareja.', border: 'neon-border-pink', glow: 'glow-pink' },
+            { color: 'rosa', cat: 'Sorpresas y Castigos', text: 'Castigo: Bebe un vaso entero de bebida de un solo trago.', border: 'neon-border-pink', glow: 'glow-pink' },
+            { color: 'rosa', cat: 'Sorpresas y Castigos', text: 'Castigo: Estás congelado/a hasta tu próximo turno.', border: 'neon-border-pink', glow: 'glow-pink' },
+            { color: 'rosa', cat: 'Sorpresas y Castigos', text: 'Sorpresa: Inmunidad. Si tiras la torre no hay castigo.', border: 'neon-border-pink', glow: 'glow-pink' },
+            { color: 'rosa', cat: 'Sorpresas y Castigos', text: 'Castigo: Deja que tu pareja te haga cosquillas 30 segundos.', border: 'neon-border-pink', glow: 'glow-pink' },
+            { color: 'rosa', cat: 'Sorpresas y Castigos', text: 'Comodín: Invéntate una nueva norma hasta el final.', border: 'neon-border-pink', glow: 'glow-pink' },
+            { color: 'rosa', cat: 'Sorpresas y Castigos', text: 'Sorpresa: Eliges la música el resto de la noche.', border: 'neon-border-pink', glow: 'glow-pink' },
+            { color: 'rosa', cat: 'Sorpresas y Castigos', text: 'Castigo: Siéntate en el suelo hasta que te vuelva a tocar rosa.', border: 'neon-border-pink', glow: 'glow-pink' },
+            { color: 'rosa', cat: 'Sorpresas y Castigos', text: 'Comodín: Rechaza un reto y que lo haga tu pareja.', border: 'neon-border-pink', glow: 'glow-pink' },
+            { color: 'rosa', cat: 'Sorpresas y Castigos', text: 'Castigo: Tu pareja envía un WhatsApp raro a un amigo tuyo.', border: 'neon-border-pink', glow: 'glow-pink' },
+            { color: 'rosa', cat: 'Sorpresas y Castigos', text: 'Castigo: Prohibido tocar el móvil hasta mañana.', border: 'neon-border-pink', glow: 'glow-pink' },
+            { color: 'rosa', cat: 'Sorpresas y Castigos', text: 'Sorpresa: Elige qué vamos a comer mañana.', border: 'neon-border-pink', glow: 'glow-pink' },
+            { color: 'rosa', cat: 'Sorpresas y Castigos', text: 'Comodín: Tira el dado dos veces en tu próximo turno.', border: 'neon-border-pink', glow: 'glow-pink' },
+            { color: 'rosa', cat: 'Sorpresas y Castigos', text: 'Castigo: Te toca recoger el Jenga al final de la partida.', border: 'neon-border-pink', glow: 'glow-pink' },
+            { color: 'rosa', cat: 'Sorpresas y Castigos', text: 'Sorpresa: Intercambia tu color favorito con tu pareja.', border: 'neon-border-pink', glow: 'glow-pink' },
+            { color: 'rosa', cat: 'Sorpresas y Castigos', text: 'EPIC: Si tiras la torre, tu pareja elige tu ropa de mañana.', border: 'neon-border-pink', glow: 'glow-pink' }
+        ];
+
+        const container = document.getElementById('challenges-container');
+        const fallContainer = document.getElementById('fall-penalties-container');
+        const fallWrapper = document.getElementById('fall-penalties-wrapper');
+
+        function renderFallPenalties(filterColor = 'all') {
+            fallContainer.innerHTML = '';
+            let count = 0;
+            fallPenalties.forEach(c => {
+                if (filterColor === 'all' || c.color === filterColor) {
+                    const card = document.createElement('div');
+                    card.className = `p-4 rounded-lg bg-black border border-gray-800 flex flex-col justify-between`;
+                    card.innerHTML = `
+                        <div>
+                            <span class="text-xs font-bold uppercase ${c.glow}">${c.cat}: ${c.title}</span>
+                            <p class="text-sm font-medium mt-2 text-gray-300 leading-tight">${c.text}</p>
+                        </div>
+                    `;
+                    fallContainer.appendChild(card);
+                    count++;
+                }
+            });
+            fallWrapper.style.display = count > 0 ? 'block' : 'none';
+        }
+
+        function renderChallenges(filterColor = 'all') {
+            container.innerHTML = '';
+            challenges.forEach((c, index) => {
+                if (filterColor === 'all' || c.color === filterColor) {
+                    const card = document.createElement('div');
+                    card.className = `p-6 rounded-lg bg-gray-900 border-l-8 ${c.border} flex flex-col justify-between transition-all hover:bg-gray-800`;
+                    card.innerHTML = `
+                        <div class="mb-4">
+                            <span class="text-xs font-bold uppercase ${c.glow}">${c.cat}</span>
+                            <p class="text-lg font-medium mt-2 leading-tight">${c.text}</p>
+                        </div>
+                        <div class="text-right text-gray-700 text-sm font-bold">#${index + 1}</div>
+                    `;
+                    container.appendChild(card);
+                }
+            });
+        }
+
+        function filter(color) {
+            renderChallenges(color);
+            renderFallPenalties(color);
+        }
+
+        function showRandom() {
+            const modal = document.getElementById('random-modal');
+            const modalContent = document.getElementById('modal-content');
+            const catEl = document.getElementById('modal-category');
+            const textEl = document.getElementById('modal-text');
+            
+            const random = challenges[Math.floor(Math.random() * challenges.length)];
+            
+            catEl.innerText = random.cat;
+            catEl.className = `text-sm uppercase tracking-widest mb-4 font-bold ${random.glow}`;
+            textEl.innerText = random.text;
+            
+            modalContent.className = `max-w-lg w-full p-10 rounded-2xl text-center relative bg-black border-4 ${random.border} shadow-[0_0_50px_rgba(0,0,0,0.5)]`;
+            
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('random-modal').style.display = 'none';
+        }
+
+        function downloadPDF() {
+            const btn = document.getElementById('download-btn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = "Procesando PDF... espera unos segundos";
+
+            // Creamos un contenedor virtual que no se ve afectado por el scroll
+            const tempContainer = document.createElement('div');
+            tempContainer.style.backgroundColor = '#050505'; // Forzar fondo negro raíz
+
+            const colors = [
+                { id: 'rojo', name: 'Rojo: Spicy & Pasión', hex: '#ff0055' },
+                { id: 'amarillo', name: 'Amarillo: Mental & Trivia', hex: '#ffcc00' },
+                { id: 'verde', name: 'Verde: Acción & Diversión', hex: '#33ff00' },
+                { id: 'azul', name: 'Azul: Confesiones', hex: '#00ccff' },
+                { id: 'morado', name: 'Morado: Nuestra Historia', hex: '#cc00ff' },
+                { id: 'rosa', name: 'Rosa: Sorpresas y Castigos', hex: '#ff00cc' }
+            ];
+
+            const pdfStyles = `
+                <style>
+                    .pdf-section {
+                        background-color: #050505 !important;
+                        padding: 20px 30px;
+                        box-sizing: border-box;
+                        width: 100%;
+                    }
+                    .pdf-header {
+                        text-align: center;
+                        font-family: 'Orbitron', sans-serif;
+                        text-transform: uppercase;
+                        margin-bottom: 30px;
+                        padding-top: 10px;
+                    }
+                    .pdf-item {
+                        padding: 15px;
+                        background: #111111 !important;
+                        border-radius: 8px;
+                        margin-bottom: 12px;
+                        border-left-width: 8px;
+                        border-left-style: solid;
+                        display: block;
+                        /* SOLUCIÓN 1: Evita que la caja se corte a la mitad entre páginas */
+                        page-break-inside: avoid !important;
+                        break-inside: avoid !important;
+                    }
+                    .pdf-num {
+                        font-size: 11px;
+                        font-weight: bold;
+                        text-transform: uppercase;
+                        margin-bottom: 5px;
+                        display: block;
+                    }
+                    .pdf-text {
+                        font-size: 15px;
+                        color: #eeeeee;
+                        margin: 0;
+                        font-family: 'Rajdhani', sans-serif;
+                    }
+                    /* SOLUCIÓN 2: Salto de página forzado solo antes de las nuevas secciones */
+                    .page-break { page-break-before: always !important; padding-top: 500px !important;}
+                </style>
+            `;
+
+            tempContainer.innerHTML = pdfStyles;
+
+            colors.forEach((colorObj, index) => {
+                const section = document.createElement('div');
+                // Aplicamos el salto de página a todas las secciones menos a la primera
+                section.className = `pdf-section ${index > 0 ? 'page-break' : ''}`;
+                
+                const filtered = challenges.filter(c => c.color === colorObj.id);
+                
+                section.innerHTML = `
+                    <div class="pdf-header">
+                        <h1 style="color: ${colorObj.hex}; font-size: 32px; margin: 0;">${colorObj.name}</h1>
+                        <hr style="border: 1px solid ${colorObj.hex}; margin-top: 10px; opacity: 0.3;">
+                    </div>
+                    <div style="display: flex; flex-direction: column;">
+                        ${filtered.map((c, i) => `
+                            <div class="pdf-item" style="border-left-color: ${colorObj.hex};">
+                                <span class="pdf-num" style="color: ${colorObj.hex};">Reto #${i+1}</span>
+                                <p class="pdf-text">${c.text}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                tempContainer.appendChild(section);
+            });
+
+            // --- PÁGINA EXTRA: CASTIGOS POR DERRIBO ---
+            const fallPage = document.createElement('div');
+            fallPage.className = 'pdf-section page-break';
+            fallPage.innerHTML = `
+                <div class="pdf-header">
+                    <h1 style="color: #ff0055; font-size: 32px; margin: 0; text-shadow: 0 0 10px #ff0055;">💥 SI LA TORRE CAE 💥</h1>
+                    <p style="color: #aaaaaa; font-size: 14px; text-transform: uppercase; margin-top: 5px;">El castigo depende del color del bloque derribado</p>
+                    <hr style="border: 1px solid #ff0055; margin-top: 15px; opacity: 0.5;">
+                </div>
+                <div style="display: flex; flex-direction: column;">
+                    ${fallPenalties.map(c => `
+                        <div class="pdf-item" style="border-left-color: ${c.hex}; margin-bottom: 15px;">
+                            <span class="pdf-num" style="color: ${c.hex}; font-size: 14px;">${c.cat} - ${c.title}</span>
+                            <p class="pdf-text" style="font-size: 16px;">${c.text}</p>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+            tempContainer.appendChild(fallPage);
+
+            const opt = {
+                margin:       0,
+                filename:     'Jenga_Neon_Night_Full.pdf',
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { 
+                    scale: 2, 
+                    backgroundColor: '#050505', 
+                    useCORS: true,
+                    scrollY: 0, // Fuerza a la librería a no capturar el scroll de la ventana
+                    scrollX: 0
+                },
+                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
+                // SOLUCIÓN 3: Activa el motor de la librería para que lea el "page-break-inside"
+                pagebreak:    { mode: ['css', 'legacy'] }
+            };
+
+            // Ejecutamos y al terminar devolvemos el texto original al botón
+            html2pdf().set(opt).from(tempContainer).save().then(() => {
+                btn.innerHTML = originalText;
+            });
+        }
+
+        renderChallenges();
+        renderFallPenalties();
+    </script>
+</body>
+</html>
