@@ -169,21 +169,16 @@
             </header>
 
             <!-- Main Controls (Botones Premium sin Emojis) -->
-            <div class="flex flex-col md:flex-row justify-center items-center gap-5 mb-10 w-full px-4">
+            <div class="flex flex-col md:flex-row justify-center items-center gap-5 mb-8 w-full px-4">
                 
                 <!-- Botón Modo (Theme) -->
-            <button id="theme-btn" onclick="toggleTheme()" class="relative flex items-center justify-center gap-3 px-8 py-3 rounded-full text-sm font-bold uppercase tracking-widest transition-all duration-300 w-full md:w-auto border border-[#ff00cc] text-[#ff00cc] shadow-[0_0_15px_rgba(255,0,204,0.2)] hover:shadow-[0_0_25px_rgba(255,0,204,0.5)] bg-black/50 backdrop-blur-sm group">
-                <span id="theme-dot" class="w-2 h-2 rounded-full bg-[#ff00cc] shadow-[0_0_8px_#ff00cc] animate-pulse"></span>
-                <span id="theme-text">MODO PAREJAS</span>
-            </button>
+                <button id="theme-btn" onclick="toggleTheme()" class="relative flex items-center justify-center gap-3 px-8 py-3 rounded-full text-sm font-bold uppercase tracking-widest transition-all duration-300 w-full md:w-auto border border-[#ff00cc] text-[#ff00cc] shadow-[0_0_15px_rgba(255,0,204,0.2)] hover:shadow-[0_0_25px_rgba(255,0,204,0.5)] bg-black/50 backdrop-blur-sm group">
+                    <span id="theme-dot" class="w-2 h-2 rounded-full bg-[#ff00cc] shadow-[0_0_8px_#ff00cc] animate-pulse"></span>
+                    <span id="theme-text">MODO PAREJAS</span>
+                </button>
 
-            <!-- Botón Jugadores -->
-            <button onclick="togglePlayersModal()" class="relative flex items-center justify-center gap-3 px-8 py-3 rounded-full text-sm font-bold uppercase tracking-widest transition-all duration-300 w-full md:w-auto border border-[#33ff00] text-[#33ff00] shadow-[0_0_15px_rgba(51,255,0,0.2)] hover:shadow-[0_0_25px_rgba(51,255,0,0.5)] bg-black/50 backdrop-blur-sm group">
-                <span>👥 JUGADORES</span>
-            </button>
-
-            <!-- Botón Aleatorio -->
-            <button onclick="showRandom()" class="relative group px-12 py-4 rounded-full font-bold uppercase tracking-[0.3em] overflow-hidden transition-all duration-300 hover:scale-105 active:scale-95 bg-black/60 backdrop-blur-md border border-[#00ccff] text-[#00ccff] shadow-[0_0_15px_rgba(0,204,255,0.3)] hover:shadow-[0_0_30px_rgba(0,204,255,0.6)] w-full md:w-auto">
+                <!-- Botón Aleatorio -->
+                <button onclick="showRandom()" class="relative group px-12 py-4 rounded-full font-bold uppercase tracking-[0.3em] overflow-hidden transition-all duration-300 hover:scale-105 active:scale-95 bg-black/60 backdrop-blur-md border border-[#00ccff] text-[#00ccff] shadow-[0_0_15px_rgba(0,204,255,0.3)] hover:shadow-[0_0_30px_rgba(0,204,255,0.6)] w-full md:w-auto">
                     <span class="relative z-10 drop-shadow-[0_0_8px_rgba(0,204,255,0.8)] text-lg">ALEATORIO</span>
                     <!-- Brillo interior hover -->
                     <div class="absolute inset-0 bg-[#00ccff]/10 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500 ease-out"></div>
@@ -197,6 +192,43 @@
                     <!-- Fondo táctico a rayas que aparece al activar -->
                     <div id="hardcore-bg" class="absolute inset-0 bg-[repeating-linear-gradient(45deg,transparent,transparent_10px,rgba(255,0,85,0.15)_10px,rgba(255,0,85,0.15)_20px)] opacity-0 transition-opacity duration-300"></div>
                 </button>
+            </div>
+
+            <!-- SECCIÓN DE JUGADORES Y TURNOS -->
+            <div class="mb-10 w-full bg-gray-900/40 border border-gray-800/80 rounded-xl p-5 shadow-lg backdrop-blur-sm transition-all duration-300">
+                <div class="flex flex-col md:flex-row justify-between items-stretch gap-6">
+                    
+                    <!-- Gestión de Jugadores -->
+                    <div class="flex-1 w-full flex flex-col justify-center">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="w-2 h-2 rounded-full bg-[#33ff00] shadow-[0_0_8px_#33ff00]"></span>
+                            <h3 class="text-gray-300 font-bold uppercase tracking-widest text-sm">Lista de Jugadores</h3>
+                        </div>
+                        <div class="flex gap-2 mb-3">
+                            <input type="text" id="inline-player-input" placeholder="Añadir nombre..." class="bg-black/50 border border-gray-700 rounded-lg text-white px-4 py-2 text-sm focus:outline-none focus:border-[#33ff00] w-full transition-colors" onkeypress="if(event.key === 'Enter') addPlayerInline()">
+                            <button onclick="addPlayerInline()" class="bg-[#33ff00]/10 text-[#33ff00] border border-[#33ff00]/50 px-4 py-2 rounded-lg text-sm font-bold hover:bg-[#33ff00]/30 hover:border-[#33ff00] transition-all uppercase tracking-wider">Añadir</button>
+                        </div>
+                        <div id="inline-players-list" class="flex flex-wrap gap-2">
+                            <span class="text-gray-600 text-sm italic">Añade nombres para habilitar los turnos...</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Divisor Visual -->
+                    <div class="hidden md:block w-px bg-gradient-to-b from-transparent via-gray-700 to-transparent"></div>
+                    <div class="block md:hidden h-px w-full bg-gradient-to-r from-transparent via-gray-700 to-transparent"></div>
+                    
+                    <!-- Tracker de Turno -->
+                    <div class="flex-1 w-full flex flex-col justify-center items-center text-center">
+                        <h3 class="text-gray-500 font-bold uppercase tracking-widest mb-2 text-sm">TURNO ACTUAL</h3>
+                        <div id="current-turn-display" class="text-3xl md:text-4xl font-bold font-['Orbitron'] text-gray-600 uppercase tracking-widest min-h-[40px] flex items-center justify-center transition-all duration-300">
+                            ---
+                        </div>
+                        <button onclick="nextTurn()" id="skip-turn-btn" class="mt-3 text-xs text-gray-500 hover:text-white uppercase tracking-widest border-b border-transparent hover:border-white transition-all hidden">
+                            Saltar Turno ⏭
+                        </button>
+                    </div>
+
+                </div>
             </div>
         </div>
 
@@ -233,27 +265,12 @@
     <!-- Footer -->
     <footer class="mt-auto py-8 text-center bg-black/40 border-t border-gray-900 w-full">
         <p id="download-btn" class="text-gray-600 text-[10px] uppercase tracking-tighter transition-all hover:text-gray-300 cursor-default select-none" onclick="downloadPDF()" title="Exportar a PDF">
-            v3.0.0 • party_mode_enabled • <span class="cursor-pointer hover:underline">sys_export_log_pdf</span>
+            v3.5.0 • party_mode_enabled • <span class="cursor-pointer hover:underline">sys_export_log_pdf</span>
         </p>
     </footer>
 
     <!-- Contenedor Oculto para Generación de PDF -->
     <div id="pdf-content" style="display: none;"></div>
-
-    <!-- Modal Jugadores -->
-    <div id="players-modal" class="random-overlay">
-        <div class="max-w-md w-full p-8 rounded-2xl text-center relative bg-gray-900 border border-[#33ff00] shadow-[0_0_30px_rgba(51,255,0,0.3)]">
-            <h2 class="text-2xl font-bold mb-6 text-[#33ff00] uppercase tracking-widest">Añadir Jugadores</h2>
-            <div class="flex gap-2 mb-6">
-                <input type="text" id="new-player-input" placeholder="Nombre..." class="flex-grow bg-black border border-gray-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#33ff00] transition-colors" onkeypress="if(event.key === 'Enter') addPlayer()">
-                <button onclick="addPlayer()" class="bg-[#33ff00]/20 text-[#33ff00] border border-[#33ff00] px-4 py-2 rounded-lg font-bold hover:bg-[#33ff00]/40 transition-colors">Añadir</button>
-            </div>
-            <div id="players-list" class="flex flex-wrap gap-3 mb-8 max-h-40 overflow-y-auto justify-center">
-                <!-- Jugadores añadidos irán aquí -->
-            </div>
-            <button onclick="togglePlayersModal()" class="px-8 py-3 bg-white text-black font-bold rounded-full uppercase hover:bg-gray-300 transition-all w-full">Listo</button>
-        </div>
-    </div>
 
     <!-- Random Modal -->
     <div id="random-modal" class="random-overlay">
@@ -297,7 +314,10 @@
         let currentFilter = 'all';
         let isHardcore = false;
         let currentTheme = 'couples'; // 'couples' o 'friends'
+        
         let players = [];
+        let currentPlayerIndex = 0;
+        
         let currentTimerSeconds = 0;
         let timerInterval = null;
 
@@ -406,7 +426,7 @@
             { color: 'azul', cat: 'Confesiones (Conectar)', text: '¿Qué talento inútil tienes que casi nadie sabe?', border: 'neon-border-blue', glow: 'glow-blue' },
             { color: 'azul', cat: 'Confesiones (Conectar)', text: 'Hazme el cumplido más honesto y profundo que se te ocurra ahora.', border: 'neon-border-blue', glow: 'glow-blue' },
             { color: 'morado', cat: 'Pareja (Historia)', text: 'Recrea en 30 segundos, actuando, cómo fue el día que nos conocimos.', border: 'neon-border-purple', glow: 'glow-purple' },
-            { color: 'morado', cat: 'Pareja (Historia)', text: '¿Qué es lo que más te llamó la atención de mí la primera vez?', border: 'neon-border-purple', glow: 'glow-purple' },
+            { color: 'morado', cat: 'Pareja (Historia)', text: '¿Qué es lo más que te llamó la atención de mí la primera vez?', border: 'neon-border-purple', glow: 'glow-purple' },
             { color: 'morado', cat: 'Pareja (Historia)', text: 'Confiesa: ¿qué manía mía te vuelve loco/a (para bien)?', border: 'neon-border-purple', glow: 'glow-purple' },
             { color: 'morado', cat: 'Pareja (Historia)', text: 'Recuerda el peor regalo que nos hayamos hecho y ríete.', border: 'neon-border-purple', glow: 'glow-purple' },
             { color: 'rosa', cat: 'Sorpresas y Castigos', text: 'Te toca preparar el desayuno para los dos mañana.', border: 'neon-border-pink', glow: 'glow-pink' },
@@ -913,64 +933,82 @@
         }
 
         // =================================================================================
-        // RULETA ALEATORIA Y CONFETI
+        // GESTIÓN DE JUGADORES Y TURNOS
         // =================================================================================
-        let rouletteInterval;
-
-        function togglePlayersModal() {
-            const modal = document.getElementById('players-modal');
-            if (modal.style.display === 'flex') {
-                modal.style.opacity = '0';
-                setTimeout(() => modal.style.display = 'none', 300);
-            } else {
-                modal.style.display = 'flex';
-                setTimeout(() => modal.style.opacity = '1', 10);
-                renderPlayers();
-            }
-        }
-
-        function addPlayer() {
-            const input = document.getElementById('new-player-input');
+        function addPlayerInline() {
+            const input = document.getElementById('inline-player-input');
             const name = input.value.trim();
             if (name && !players.includes(name)) {
                 players.push(name);
                 input.value = '';
-                renderPlayers();
+                renderPlayersInline();
             }
         }
 
-        function removePlayer(name) {
+        function removePlayerInline(name) {
             players = players.filter(p => p !== name);
-            renderPlayers();
+            if (currentPlayerIndex >= players.length) currentPlayerIndex = 0;
+            renderPlayersInline();
         }
 
-        function renderPlayers() {
-            const list = document.getElementById('players-list');
+        function renderPlayersInline() {
+            const list = document.getElementById('inline-players-list');
+            const turnDisplay = document.getElementById('current-turn-display');
+            const skipBtn = document.getElementById('skip-turn-btn');
+
+            if (players.length === 0) {
+                list.innerHTML = '<span class="text-gray-600 text-sm italic">Añade nombres para habilitar los turnos...</span>';
+                turnDisplay.innerHTML = '---';
+                turnDisplay.classList.remove('text-[#00ccff]', 'drop-shadow-[0_0_10px_rgba(0,204,255,0.8)]');
+                turnDisplay.classList.add('text-gray-600');
+                skipBtn.classList.add('hidden');
+                return;
+            }
+
             list.innerHTML = '';
-            players.forEach(p => {
+            players.forEach((p, index) => {
+                const isActive = index === currentPlayerIndex;
+                const activeClass = isActive ? 'border-[#00ccff] bg-[#00ccff]/20 shadow-[0_0_8px_rgba(0,204,255,0.4)]' : 'border-gray-700 bg-gray-800';
                 list.innerHTML += `
-                    <div class="flex items-center gap-2 bg-gray-800 border border-gray-700 px-3 py-1 rounded-full">
-                        <span class="text-white font-bold">${p}</span>
-                        <button onclick="removePlayer('${p}')" class="text-red-500 hover:text-red-300 font-bold ml-2">&times;</button>
+                    <div class="flex items-center gap-1 ${activeClass} border px-3 py-1 rounded-md transition-all">
+                        <span class="text-white text-xs font-bold uppercase tracking-wider">${p}</span>
+                        <button onclick="removePlayerInline('${p}')" class="text-red-500 hover:text-red-300 font-bold ml-2 text-sm leading-none">&times;</button>
                     </div>
                 `;
             });
+
+            // Update Turn Display
+            const currentPlayer = players[currentPlayerIndex];
+            turnDisplay.innerHTML = currentPlayer;
+            turnDisplay.classList.remove('text-gray-600');
+            turnDisplay.classList.add('text-[#00ccff]', 'drop-shadow-[0_0_10px_rgba(0,204,255,0.8)]');
+            skipBtn.classList.remove('hidden');
+        }
+
+        function nextTurn() {
+            if (players.length > 0) {
+                currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
+                renderPlayersInline();
+            }
         }
 
         function personalizeChallengeText(text) {
             if (players.length === 0) return { newText: text, active: '' };
             
-            // Seleccionar jugador activo
-            const activePlayer = players[Math.floor(Math.random() * players.length)];
+            const activePlayer = players[currentPlayerIndex];
             let otherPlayers = players.filter(p => p !== activePlayer);
             let randomOther = otherPlayers.length > 0 ? otherPlayers[Math.floor(Math.random() * otherPlayers.length)] : activePlayer;
 
-            // Reemplazar menciones
             const regex = /(tu pareja|al jugador a tu izquierda|al jugador a tu derecha|a la persona a tu izquierda|a la persona a tu derecha|la persona a tu izquierda|la persona a tu derecha|alguien del grupo|a alguien)/gi;
-            const newText = text.replace(regex, `<span class="text-[#00ccff] font-bold drop-shadow-[0_0_5px_rgba(0,204,255,0.8)]">${randomOther}</span>`);
+            const newText = text.replace(regex, `<span class="text-[#ffcc00] font-bold drop-shadow-[0_0_5px_rgba(255,204,0,0.8)]">${randomOther}</span>`);
 
             return { newText, active: activePlayer };
         }
+
+        // =================================================================================
+        // RULETA ALEATORIA Y CONFETI
+        // =================================================================================
+        let rouletteInterval;
 
         function showRandom() {
             SFX.resume(); // Asegurar que el contexto de audio despierta al hacer clic
@@ -1034,7 +1072,7 @@
             textEl.innerHTML = personalized.newText;
 
             if (personalized.active) {
-                activePlayerEl.innerText = `Turno de: ${personalized.active}`;
+                activePlayerEl.innerHTML = `¡Te toca, <span class="text-[#00ccff] drop-shadow-[0_0_10px_rgba(0,204,255,0.8)]">${personalized.active}</span>!`;
                 activePlayerEl.classList.remove('hidden');
             }
             
@@ -1134,6 +1172,7 @@
             setTimeout(() => {
                 modal.style.display = 'none';
                 clearInterval(rouletteInterval);
+                nextTurn(); // Avanza el turno automáticamente al cerrar el reto
             }, 300);
         }
 
@@ -1229,6 +1268,7 @@
 
         // Inicializar
         updateData();
+        renderPlayersInline(); // Iniciar UI de jugadores vacía
     </script>
 </body>
 </html>
