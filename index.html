@@ -265,7 +265,7 @@
     <!-- Footer -->
     <footer class="mt-auto py-8 text-center bg-black/40 border-t border-gray-900 w-full">
         <p id="download-btn" class="text-gray-600 text-[10px] uppercase tracking-tighter transition-all hover:text-gray-300 cursor-default select-none" onclick="downloadPDF()" title="Exportar a PDF">
-            v3.5.0 • party_mode_enabled • <span class="cursor-pointer hover:underline">sys_export_log_pdf</span>
+            v4.0.0 • party_mode_enabled • <span class="cursor-pointer hover:underline">sys_export_log_pdf</span>
         </p>
     </footer>
 
@@ -278,12 +278,16 @@
             <!-- Contenedor de partículas -->
             <div id="particles-container" class="absolute inset-0 pointer-events-none overflow-hidden rounded-2xl z-0"></div>
             
-            <div class="relative z-10">
+            <div class="relative z-10 flex flex-col items-center">
                 <h3 id="active-player-text" class="text-2xl font-bold mb-2 text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.8)] hidden"></h3>
                 <p id="modal-category" class="text-sm uppercase tracking-widest mb-4 font-bold"></p>
-                <h2 id="modal-text" class="text-3xl md:text-4xl font-bold leading-tight mb-8 min-h-[120px] flex items-center justify-center"></h2>
                 
-                <div class="flex flex-col gap-3 items-center">
+                <!-- Wrapper DIV para que el texto rompa normalmente -->
+                <div class="min-h-[120px] flex items-center justify-center mb-8 px-2 w-full">
+                    <h2 id="modal-text" class="text-3xl md:text-4xl font-bold leading-tight break-words text-center"></h2>
+                </div>
+                
+                <div class="flex flex-col gap-3 items-center w-full">
                     <button id="timer-trigger-btn" onclick="startTimer()" class="hidden px-8 py-3 bg-transparent border border-[#ffcc00] text-[#ffcc00] font-bold rounded-full uppercase hover:bg-[#ffcc00]/20 transition-all w-full md:w-auto shadow-[0_0_15px_rgba(255,204,0,0.3)]">
                         ⏱️ Iniciar Tiempo
                     </button>
@@ -408,31 +412,139 @@
             { color: 'rosa', cat: 'Rosa (Castigo Brutal)', title: 'El Gran Trago', text: 'Tienes que terminar tu bebida actual de un solo trago, o tomarte 3 chupitos.', glow: 'glow-pink', hex: '#ff00cc' }
         ];
 
+        // ACTUALIZADO: 120 Retos Parejas Normal
         const couplesNormalChallenges = [
+            // ROJO
             { color: 'rojo', cat: 'Spicy (Pasión)', text: 'Beso apasionado de película (mínimo 30 segundos).', border: 'neon-border-red', glow: 'glow-red' },
             { color: 'rojo', cat: 'Spicy (Pasión)', text: 'Quítale una prenda a tu pareja sin usar las manos.', border: 'neon-border-red', glow: 'glow-red' },
             { color: 'rojo', cat: 'Spicy (Pasión)', text: 'Véndale los ojos y recórrele el cuello con un cubito de hielo.', border: 'neon-border-red', glow: 'glow-red' },
             { color: 'rojo', cat: 'Spicy (Pasión)', text: 'Hazle un masaje de 5 minutos en la zona que tu pareja elija.', border: 'neon-border-red', glow: 'glow-red' },
+            { color: 'rojo', cat: 'Spicy (Pasión)', text: 'Dale un beso en 3 lugares diferentes del cuello.', border: 'neon-border-red', glow: 'glow-red' },
+            { color: 'rojo', cat: 'Spicy (Pasión)', text: 'Pasa la yema de tus dedos muy lentamente por la parte interna del muslo de tu pareja durante 1 minuto.', border: 'neon-border-red', glow: 'glow-red' },
+            { color: 'rojo', cat: 'Spicy (Pasión)', text: 'Susúrrale al oído qué es exactamente lo que te gustaría hacerle esta noche en la cama.', border: 'neon-border-red', glow: 'glow-red' },
+            { color: 'rojo', cat: 'Spicy (Pasión)', text: 'Hazle a tu pareja un baile sensual o "lap dance" corto (1 minuto).', border: 'neon-border-red', glow: 'glow-red' },
+            { color: 'rojo', cat: 'Spicy (Pasión)', text: 'Dale un beso húmedo y lento bajando desde su cuello hasta el borde de su pecho/camisa.', border: 'neon-border-red', glow: 'glow-red' },
+            { color: 'rojo', cat: 'Spicy (Pasión)', text: 'Muerde suavemente el lóbulo de la oreja de tu pareja y acaríciale por encima de la ropa (10 segs).', border: 'neon-border-red', glow: 'glow-red' },
+            { color: 'rojo', cat: 'Spicy (Pasión)', text: 'Siéntate a horcajadas sobre tu pareja y dale un beso con lengua que dure todo tu próximo turno.', border: 'neon-border-red', glow: 'glow-red' },
+            { color: 'rojo', cat: 'Spicy (Pasión)', text: 'Desabrocha el pantalón, la camisa o el sujetador de tu pareja usando solo una mano y muy despacio.', border: 'neon-border-red', glow: 'glow-red' },
+            { color: 'rojo', cat: 'Spicy (Pasión)', text: 'Chupa o muerde juguetonamente un dedo de tu pareja mientras le mantienes un contacto visual intenso.', border: 'neon-border-red', glow: 'glow-red' },
+            { color: 'rojo', cat: 'Spicy (Pasión)', text: 'Dale un masaje en la espalda baja rozando la línea de los glúteos durante 2 minutos.', border: 'neon-border-red', glow: 'glow-red' },
+            { color: 'rojo', cat: 'Spicy (Pasión)', text: 'Besa a tu pareja dejando un ligero rastro de saliva o aliento cálido desde su barbilla hasta su clavícula.', border: 'neon-border-red', glow: 'glow-red' },
+            { color: 'rojo', cat: 'Spicy (Pasión)', text: 'Mete las manos por debajo de la ropa de tu pareja y acaricia su piel desnuda directamente durante 1 minuto.', border: 'neon-border-red', glow: 'glow-red' },
+            { color: 'rojo', cat: 'Spicy (Pasión)', text: 'Dale un mordisquito provocativo en el labio inferior a tu pareja, tira un poco de él y suéltalo despacio.', border: 'neon-border-red', glow: 'glow-red' },
+            { color: 'rojo', cat: 'Spicy (Pasión)', text: 'Venda los ojos de tu pareja y hazle una caricia lenta que le ponga los pelos de punta donde tú elijas.', border: 'neon-border-red', glow: 'glow-red' },
+            { color: 'rojo', cat: 'Spicy (Pasión)', text: 'Pasa tu lengua dibujando un pequeño círculo en la nuca, el cuello o detrás de la oreja de tu pareja.', border: 'neon-border-red', glow: 'glow-red' },
+            { color: 'rojo', cat: 'Spicy (Pasión)', text: 'Acaricia de forma sugerente a tu pareja por debajo de la mesa durante los próximos 5 minutos.', border: 'neon-border-red', glow: 'glow-red' },
+
+            // AMARILLO
             { color: 'amarillo', cat: 'Mental (Trivia)', text: 'Di el abecedario al revés empezando desde la "M". Tienes 15 segs.', border: 'neon-border-yellow', glow: 'glow-yellow' },
             { color: 'amarillo', cat: 'Mental (Trivia)', text: 'Dime 4 series que hayamos visto enteros juntos.', border: 'neon-border-yellow', glow: 'glow-yellow' },
             { color: 'amarillo', cat: 'Mental (Trivia)', text: 'Deletrea la palabra "Esternocleidomastoideo" sin equivocarte.', border: 'neon-border-yellow', glow: 'glow-yellow' },
             { color: 'amarillo', cat: 'Mental (Trivia)', text: 'Nombra 5 películas donde actúe Leonardo DiCaprio.', border: 'neon-border-yellow', glow: 'glow-yellow' },
+            { color: 'amarillo', cat: 'Mental (Trivia)', text: '¿Cuál era mi comida favorita cuando era niño/a?', border: 'neon-border-yellow', glow: 'glow-yellow' },
+            { color: 'amarillo', cat: 'Mental (Trivia)', text: 'Di la fecha exacta de nuestro aniversario. Si fallas, pierdes un turno.', border: 'neon-border-yellow', glow: 'glow-yellow' },
+            { color: 'amarillo', cat: 'Mental (Trivia)', text: 'Menciona 3 cosas que me hacen reír siempre sin fallar.', border: 'neon-border-yellow', glow: 'glow-yellow' },
+            { color: 'amarillo', cat: 'Mental (Trivia)', text: 'Nombra 3 restaurantes a los que solemos ir a cenar a menudo.', border: 'neon-border-yellow', glow: 'glow-yellow' },
+            { color: 'amarillo', cat: 'Mental (Trivia)', text: '¿Cuál es la talla exacta de mis zapatos?', border: 'neon-border-yellow', glow: 'glow-yellow' },
+            { color: 'amarillo', cat: 'Mental (Trivia)', text: 'Nombra 5 países de Asia en 10 segundos.', border: 'neon-border-yellow', glow: 'glow-yellow' },
+            { color: 'amarillo', cat: 'Mental (Trivia)', text: '¿De qué color eran mis ojos o qué ropa llevaba en nuestra primera cita?', border: 'neon-border-yellow', glow: 'glow-yellow' },
+            { color: 'amarillo', cat: 'Mental (Trivia)', text: 'Nombra a 3 de mis familiares más cercanos por su nombre de pila.', border: 'neon-border-yellow', glow: 'glow-yellow' },
+            { color: 'amarillo', cat: 'Mental (Trivia)', text: 'Di 5 palabras dulces en otro idioma.', border: 'neon-border-yellow', glow: 'glow-yellow' },
+            { color: 'amarillo', cat: 'Mental (Trivia)', text: '¿Cuál es mi película favorita de todos los tiempos?', border: 'neon-border-yellow', glow: 'glow-yellow' },
+            { color: 'amarillo', cat: 'Mental (Trivia)', text: 'Nombra 4 cosas que tengo siempre encima de mi mesita de noche.', border: 'neon-border-yellow', glow: 'glow-yellow' },
+            { color: 'amarillo', cat: 'Mental (Trivia)', text: 'Resuelve rápido: 8 x 6 - 5. Tienes 5 segundos.', border: 'neon-border-yellow', glow: 'glow-yellow' },
+            { color: 'amarillo', cat: 'Mental (Trivia)', text: '¿Qué es lo que más odio comer o desayunar?', border: 'neon-border-yellow', glow: 'glow-yellow' },
+            { color: 'amarillo', cat: 'Mental (Trivia)', text: 'Nombra 3 canciones que nos gusten mucho a los dos.', border: 'neon-border-yellow', glow: 'glow-yellow' },
+            { color: 'amarillo', cat: 'Mental (Trivia)', text: '¿Cuál fue el último viaje o escapada que hicimos juntos?', border: 'neon-border-yellow', glow: 'glow-yellow' },
+            { color: 'amarillo', cat: 'Mental (Trivia)', text: 'Menciona mi sabor de helado favorito en menos de 3 segundos.', border: 'neon-border-yellow', glow: 'glow-yellow' },
+
+            // VERDE
             { color: 'verde', cat: 'Acción (Diversión)', text: 'Lleva a tu pareja a caballito hasta la cocina y volved.', border: 'neon-border-green', glow: 'glow-green' },
             { color: 'verde', cat: 'Acción (Diversión)', text: 'Habla con la lengua fuera cada vez que te toque hablar (5 mins).', border: 'neon-border-green', glow: 'glow-green' },
             { color: 'verde', cat: 'Acción (Diversión)', text: 'Haz 15 sentadillas ahora mismo.', border: 'neon-border-green', glow: 'glow-green' },
             { color: 'verde', cat: 'Acción (Diversión)', text: 'Imita la forma de caminar y de expresarse de tu pareja.', border: 'neon-border-green', glow: 'glow-green' },
+            { color: 'verde', cat: 'Acción (Diversión)', text: 'Cántale el estribillo de una canción romántica a tu pareja mirándole a los ojos.', border: 'neon-border-green', glow: 'glow-green' },
+            { color: 'verde', cat: 'Acción (Diversión)', text: 'Haz una mueca graciosa y manténla hasta que tu pareja se ría.', border: 'neon-border-green', glow: 'glow-green' },
+            { color: 'verde', cat: 'Acción (Diversión)', text: 'Habla con acento de telenovela durante los próximos 3 turnos.', border: 'neon-border-green', glow: 'glow-green' },
+            { color: 'verde', cat: 'Acción (Diversión)', text: 'Hazle el peinado más loco que puedas a tu pareja y que se lo deje 10 minutos.', border: 'neon-border-green', glow: 'glow-green' },
+            { color: 'verde', cat: 'Acción (Diversión)', text: 'Quítate los calcetines sin usar las manos.', border: 'neon-border-green', glow: 'glow-green' },
+            { color: 'verde', cat: 'Acción (Diversión)', text: 'Intenta hacer malabares con 3 objetos pequeños que tengas a mano.', border: 'neon-border-green', glow: 'glow-green' },
+            { color: 'verde', cat: 'Acción (Diversión)', text: 'Juega tu próximo turno de espaldas a la torre (tu pareja te guía con la voz).', border: 'neon-border-green', glow: 'glow-green' },
+            { color: 'verde', cat: 'Acción (Diversión)', text: 'Aguanta la respiración mientras sacas tu próximo bloque.', border: 'neon-border-green', glow: 'glow-green' },
+            { color: 'verde', cat: 'Acción (Diversión)', text: 'Dibuja un corazón en una hoja (o en el móvil) sosteniendo el boli con la boca.', border: 'neon-border-green', glow: 'glow-green' },
+            { color: 'verde', cat: 'Acción (Diversión)', text: 'Haz 10 abdominales ahora mismo.', border: 'neon-border-green', glow: 'glow-green' },
+            { color: 'verde', cat: 'Acción (Diversión)', text: 'Actúa como un robot hasta que vuelva a ser tu turno.', border: 'neon-border-green', glow: 'glow-green' },
+            { color: 'verde', cat: 'Acción (Diversión)', text: 'Deja que tu pareja te haga una foto "fea" desde un ángulo contrapicado.', border: 'neon-border-green', glow: 'glow-green' },
+            { color: 'verde', cat: 'Acción (Diversión)', text: 'Tírate al suelo y finge que estás nadando en el mar.', border: 'neon-border-green', glow: 'glow-green' },
+            { color: 'verde', cat: 'Acción (Diversión)', text: 'Da 5 vueltas sobre ti mismo y luego saca un bloque inmediatamente.', border: 'neon-border-green', glow: 'glow-green' },
+            { color: 'verde', cat: 'Acción (Diversión)', text: 'Usa tu mano no dominante (la que no usas normalmente) durante las próximas 2 rondas.', border: 'neon-border-green', glow: 'glow-green' },
+            { color: 'verde', cat: 'Acción (Diversión)', text: 'Intenta lamerte el codo. Si no puedes, dale un beso en la mejilla a tu pareja.', border: 'neon-border-green', glow: 'glow-green' },
+
+            // AZUL
             { color: 'azul', cat: 'Confesiones (Conectar)', text: 'Confiesa algo que rompiste o estropeaste y nunca dijiste a nadie.', border: 'neon-border-blue', glow: 'glow-blue' },
             { color: 'azul', cat: 'Confesiones (Conectar)', text: '¿Qué es lo más amable que alguien ha hecho por ti en tu vida?', border: 'neon-border-blue', glow: 'glow-blue' },
             { color: 'azul', cat: 'Confesiones (Conectar)', text: '¿Qué talento inútil tienes que casi nadie sabe?', border: 'neon-border-blue', glow: 'glow-blue' },
             { color: 'azul', cat: 'Confesiones (Conectar)', text: 'Hazme el cumplido más honesto y profundo que se te ocurra ahora.', border: 'neon-border-blue', glow: 'glow-blue' },
+            { color: 'azul', cat: 'Confesiones (Conectar)', text: '¿Cuál es el recuerdo más feliz que tienes de tu infancia?', border: 'neon-border-blue', glow: 'glow-blue' },
+            { color: 'azul', cat: 'Confesiones (Conectar)', text: 'Si pudieras viajar a cualquier parte del mundo mañana, ¿a dónde iríamos?', border: 'neon-border-blue', glow: 'glow-blue' },
+            { color: 'azul', cat: 'Confesiones (Conectar)', text: '¿Qué es lo que más te estresa en el día a día y cómo puedo ayudarte con eso?', border: 'neon-border-blue', glow: 'glow-blue' },
+            { color: 'azul', cat: 'Confesiones (Conectar)', text: 'Cuéntame una fobia ridícula o miedo tonto que tenías de pequeño/a.', border: 'neon-border-blue', glow: 'glow-blue' },
+            { color: 'azul', cat: 'Confesiones (Conectar)', text: '¿Cuál es el sueño más raro o divertido que has tenido conmigo?', border: 'neon-border-blue', glow: 'glow-blue' },
+            { color: 'azul', cat: 'Confesiones (Conectar)', text: 'Si ganáramos la lotería mañana, ¿en qué gastarías el primer millón?', border: 'neon-border-blue', glow: 'glow-blue' },
+            { color: 'azul', cat: 'Confesiones (Conectar)', text: '¿Qué es lo que más te gusta de nuestra rutina diaria?', border: 'neon-border-blue', glow: 'glow-blue' },
+            { color: 'azul', cat: 'Confesiones (Conectar)', text: 'Confiesa un placer culpable (canción, película, comida) que te da vergüenza admitir.', border: 'neon-border-blue', glow: 'glow-blue' },
+            { color: 'azul', cat: 'Confesiones (Conectar)', text: '¿Qué cualidad admiras más en mí y desearías tener tú?', border: 'neon-border-blue', glow: 'glow-blue' },
+            { color: 'azul', cat: 'Confesiones (Conectar)', text: '¿Cuál ha sido el momento en el que te has sentido más orgulloso/a de ti mismo/a?', border: 'neon-border-blue', glow: 'glow-blue' },
+            { color: 'azul', cat: 'Confesiones (Conectar)', text: 'Si pudieras cambiar una sola cosa del mundo, ¿cuál sería?', border: 'neon-border-blue', glow: 'glow-blue' },
+            { color: 'azul', cat: 'Confesiones (Conectar)', text: '¿Qué es lo más atrevido o espontáneo que has hecho en tu vida?', border: 'neon-border-blue', glow: 'glow-blue' },
+            { color: 'azul', cat: 'Confesiones (Conectar)', text: 'Si tuvieras un superpoder, ¿cuál elegirías y por qué?', border: 'neon-border-blue', glow: 'glow-blue' },
+            { color: 'azul', cat: 'Confesiones (Conectar)', text: 'Cuéntame una anécdota divertida de tu época del colegio que nunca me hayas dicho.', border: 'neon-border-blue', glow: 'glow-blue' },
+            { color: 'azul', cat: 'Confesiones (Conectar)', text: '¿Cuál es la lección más importante que has aprendido desde que estamos juntos?', border: 'neon-border-blue', glow: 'glow-blue' },
+            { color: 'azul', cat: 'Confesiones (Conectar)', text: 'Dime algo que siempre has querido aprender a hacer pero nunca te has atrevido.', border: 'neon-border-blue', glow: 'glow-blue' },
+
+            // MORADO
             { color: 'morado', cat: 'Pareja (Historia)', text: 'Recrea en 30 segundos, actuando, cómo fue el día que nos conocimos.', border: 'neon-border-purple', glow: 'glow-purple' },
-            { color: 'morado', cat: 'Pareja (Historia)', text: '¿Qué es lo más que te llamó la atención de mí la primera vez?', border: 'neon-border-purple', glow: 'glow-purple' },
+            { color: 'morado', cat: 'Pareja (Historia)', text: '¿Qué es lo que más te llamó la atención de mí la primera vez que nos vimos?', border: 'neon-border-purple', glow: 'glow-purple' },
             { color: 'morado', cat: 'Pareja (Historia)', text: 'Confiesa: ¿qué manía mía te vuelve loco/a (para bien)?', border: 'neon-border-purple', glow: 'glow-purple' },
-            { color: 'morado', cat: 'Pareja (Historia)', text: 'Recuerda el peor regalo que nos hayamos hecho y ríete.', border: 'neon-border-purple', glow: 'glow-purple' },
-            { color: 'rosa', cat: 'Sorpresas y Castigos', text: 'Te toca preparar el desayuno para los dos mañana.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Sorpresas y Castigos', text: 'Comodín: Vale por un Masaje de 15 min cuando tú quieras.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Sorpresas y Castigos', text: 'Sorpresa: Inmunidad. Si tiras la torre no hay castigo.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Sorpresas y Castigos', text: 'Castigo: Prohibido tocar el móvil hasta mañana.', border: 'neon-border-pink', glow: 'glow-pink' }
+            { color: 'morado', cat: 'Pareja (Historia)', text: 'Recuerda el peor regalo que nos hayamos hecho y ríete al respecto.', border: 'neon-border-purple', glow: 'glow-purple' },
+            { color: 'morado', cat: 'Pareja (Historia)', text: 'Cuenta la historia de nuestro primer beso desde tu perspectiva.', border: 'neon-border-purple', glow: 'glow-purple' },
+            { color: 'morado', cat: 'Pareja (Historia)', text: '¿En qué momento exacto te diste cuenta de que te estabas enamorando de mí?', border: 'neon-border-purple', glow: 'glow-purple' },
+            { color: 'morado', cat: 'Pareja (Historia)', text: 'Nombra la mejor cita que consideras que hemos tenido hasta la fecha.', border: 'neon-border-purple', glow: 'glow-purple' },
+            { color: 'morado', cat: 'Pareja (Historia)', text: '¿Qué es lo que más echas de menos de mí cuando no estamos juntos por unos días?', border: 'neon-border-purple', glow: 'glow-purple' },
+            { color: 'morado', cat: 'Pareja (Historia)', text: 'Describe nuestra relación usando única y exclusivamente 3 palabras.', border: 'neon-border-purple', glow: 'glow-purple' },
+            { color: 'morado', cat: 'Pareja (Historia)', text: '¿Cuál es tu foto favorita de los dos juntos en tu móvil? Enséñamela.', border: 'neon-border-purple', glow: 'glow-purple' },
+            { color: 'morado', cat: 'Pareja (Historia)', text: 'Recuerda una discusión tonta que tuvimos hace tiempo y que ahora te hace reír.', border: 'neon-border-purple', glow: 'glow-purple' },
+            { color: 'morado', cat: 'Pareja (Historia)', text: 'Si nuestra relación fuera una película, ¿cuál sería el título y de qué género sería?', border: 'neon-border-purple', glow: 'glow-purple' },
+            { color: 'morado', cat: 'Pareja (Historia)', text: 'Dime una cosa que crees que he cambiado en ti a mejor desde que estamos juntos.', border: 'neon-border-purple', glow: 'glow-purple' },
+            { color: 'morado', cat: 'Pareja (Historia)', text: '¿Cuál es la pequeña tradición de pareja que tenemos y que más te gusta?', border: 'neon-border-purple', glow: 'glow-purple' },
+            { color: 'morado', cat: 'Pareja (Historia)', text: 'Cita el apodo cariñoso más ridículo o cursi que nos hemos llegado a poner.', border: 'neon-border-purple', glow: 'glow-purple' },
+            { color: 'morado', cat: 'Pareja (Historia)', text: '¿Qué actividad nueva o hobby te gustaría que probáramos juntos este año?', border: 'neon-border-purple', glow: 'glow-purple' },
+            { color: 'morado', cat: 'Pareja (Historia)', text: 'Cuéntame qué pensaste de mí justo después de que terminara nuestra primera cita.', border: 'neon-border-purple', glow: 'glow-purple' },
+            { color: 'morado', cat: 'Pareja (Historia)', text: '¿Qué es lo que más te enorgullece de nosotros como equipo o pareja?', border: 'neon-border-purple', glow: 'glow-purple' },
+            { color: 'morado', cat: 'Pareja (Historia)', text: 'Si tuviéramos que repetir un solo día de nuestra relación desde cero, ¿cuál elegirías?', border: 'neon-border-purple', glow: 'glow-purple' },
+            { color: 'morado', cat: 'Pareja (Historia)', text: 'Adivina qué es lo que más me gusta de ti, tanto física como mentalmente.', border: 'neon-border-purple', glow: 'glow-purple' },
+
+            // ROSA
+            { color: 'rosa', cat: 'Sorpresas y Regalos', text: 'Te toca preparar el desayuno para los dos mañana por la mañana.', border: 'neon-border-pink', glow: 'glow-pink' },
+            { color: 'rosa', cat: 'Sorpresas y Regalos', text: 'Comodín: Vale por un Masaje de 15 min cuando tú quieras pedirlo.', border: 'neon-border-pink', glow: 'glow-pink' },
+            { color: 'rosa', cat: 'Sorpresas y Regalos', text: 'Sorpresa: Inmunidad. Si tiras la torre no hay castigo final para ti.', border: 'neon-border-pink', glow: 'glow-pink' },
+            { color: 'rosa', cat: 'Sorpresas y Regalos', text: 'Castigo: Prohibido tocar el móvil hasta mañana (salvo emergencias).', border: 'neon-border-pink', glow: 'glow-pink' },
+            { color: 'rosa', cat: 'Sorpresas y Regalos', text: 'Te toca fregar los platos o cargar/descargar el lavavajillas en la próxima comida.', border: 'neon-border-pink', glow: 'glow-pink' },
+            { color: 'rosa', cat: 'Sorpresas y Regalos', text: 'Tienes el control absoluto del mando de la tele/Netflix para la próxima película o serie.', border: 'neon-border-pink', glow: 'glow-pink' },
+            { color: 'rosa', cat: 'Sorpresas y Regalos', text: 'Comodín: Vale por un favor sin preguntas. (Guárdalo para cuando lo necesites).', border: 'neon-border-pink', glow: 'glow-pink' },
+            { color: 'rosa', cat: 'Sorpresas y Regalos', text: 'Castigo: Pierdes tu próximo turno. Tu pareja debe sacar dos bloques seguidos.', border: 'neon-border-pink', glow: 'glow-pink' },
+            { color: 'rosa', cat: 'Sorpresas y Regalos', text: 'Tienes que hablar susurrando (como en una biblioteca) durante las próximas 3 rondas.', border: 'neon-border-pink', glow: 'glow-pink' },
+            { color: 'rosa', cat: 'Sorpresas y Regalos', text: 'Te toca hacer la cama de los dos todos los días durante la próxima semana.', border: 'neon-border-pink', glow: 'glow-pink' },
+            { color: 'rosa', cat: 'Sorpresas y Regalos', text: 'Comodín: Vale por elegir qué cenamos y dónde pedimos el próximo fin de semana.', border: 'neon-border-pink', glow: 'glow-pink' },
+            { color: 'rosa', cat: 'Sorpresas y Regalos', text: 'Cambio de sentido: Si sacas este bloque, vuelve a tocarte a ti inmediatamente.', border: 'neon-border-pink', glow: 'glow-pink' },
+            { color: 'rosa', cat: 'Sorpresas y Regalos', text: 'Te toca ir a prepararle la bebida o el snack favorito a tu pareja ahora mismo.', border: 'neon-border-pink', glow: 'glow-pink' },
+            { color: 'rosa', cat: 'Sorpresas y Regalos', text: 'Castigo: No puedes usar la letra "S" en la próxima ronda. Si te equivocas, sacas otro bloque extra.', border: 'neon-border-pink', glow: 'glow-pink' },
+            { color: 'rosa', cat: 'Sorpresas y Regalos', text: 'Sorpresa: Tu pareja te debe un abrazo de oso de 1 minuto de duración.', border: 'neon-border-pink', glow: 'glow-pink' },
+            { color: 'rosa', cat: 'Sorpresas y Regalos', text: 'Castigo: Tienes que jugar tapándote un ojo con la mano hasta tu próximo turno.', border: 'neon-border-pink', glow: 'glow-pink' },
+            { color: 'rosa', cat: 'Sorpresas y Regalos', text: 'Comodín: Vale por 10 minutos de caricias en la cabeza o la espalda mientras vemos la tele.', border: 'neon-border-pink', glow: 'glow-pink' },
+            { color: 'rosa', cat: 'Sorpresas y Regalos', text: 'Te toca decidir la próxima canción o playlist que suene de fondo.', border: 'neon-border-pink', glow: 'glow-pink' },
+            { color: 'rosa', cat: 'Sorpresas y Regalos', text: 'Sorpresa: Cambia el bloque que ibas a sacar por uno más fácil sin penalización.', border: 'neon-border-pink', glow: 'glow-pink' },
+            { color: 'rosa', cat: 'Sorpresas y Regalos', text: 'Castigo: Debes decir "Te quiero mucho" con voz de robot cada vez que saques un bloque.', border: 'neon-border-pink', glow: 'glow-pink' }
         ];
 
         const couplesHardcoreChallenges = [
@@ -511,7 +623,7 @@
             { color: 'azul', cat: 'Confesiones Extremas', text: '¿Alguna vez has pensado en serme infiel, aunque fuera por un milisegundo en una mala racha?', border: 'neon-border-blue', glow: 'glow-blue' },
             { color: 'azul', cat: 'Confesiones Extremas', text: '¿Cuál es la mejor/peor fantasía que has tenido con alguien que no soy yo estando juntos?', border: 'neon-border-blue', glow: 'glow-blue' },
             { color: 'azul', cat: 'Confesiones Extremas', text: 'Dime el nombre de una persona con la que te arrepientes profundamente de haberte acostado.', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones Extremas', text: '¿Has borrado alguna vez un mensaje o chat en tu móvil específicamente para que yo no lo viera?', border: 'neon-border-blue', glow: 'glow-blue' },
+            { color: 'azul', cat: 'Confesiones Extremas', text: '¿Has borrado alguna vez un mensaje o chat en tu móvil specifically para que yo no lo viera?', border: 'neon-border-blue', glow: 'glow-blue' },
             { color: 'azul', cat: 'Confesiones Extremas', text: '¿Alguna vez has fingido que te gustaba algo en la cama solo por no herir mi ego?', border: 'neon-border-blue', glow: 'glow-blue' },
             { color: 'azul', cat: 'Confesiones Extremas', text: '¿Quién de mis amigos/as te parece el más atractivo/a físicamente hablando?', border: 'neon-border-blue', glow: 'glow-blue' },
             { color: 'azul', cat: 'Confesiones Extremas', text: 'Si pudieras borrar de tu memoria un momento sexual desastroso nuestro, ¿cuál sería?', border: 'neon-border-blue', glow: 'glow-blue' },
