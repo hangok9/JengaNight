@@ -12,13 +12,13 @@
             --neon-red: #ff0055;
             --neon-yellow: #ffcc00;
             --neon-green: #33ff00;
-            --neon-blue: #00ccff;
+            --neon-darkgreen: #00aa44; /* Reemplaza al Azul */
             --neon-purple: #cc00ff;
-            --neon-pink: #ff00cc;
+            --neon-orange: #ff8800; /* Reemplaza al Rosa */
             
             /* Variables de fondo (Cyberpunk Grid) */
             --bg-color: #050505;
-            --grid-color: rgba(0, 204, 255, 0.05);
+            --grid-color: rgba(0, 170, 68, 0.05); /* Adaptado al nuevo Verde Oscuro */
             --vignette-color: transparent;
         }
 
@@ -53,16 +53,16 @@
         .neon-border-red { border: 2px solid var(--neon-red); box-shadow: 0 0 10px var(--neon-red), inset 0 0 5px var(--neon-red); }
         .neon-border-yellow { border: 2px solid var(--neon-yellow); box-shadow: 0 0 10px var(--neon-yellow), inset 0 0 5px var(--neon-yellow); }
         .neon-border-green { border: 2px solid var(--neon-green); box-shadow: 0 0 10px var(--neon-green), inset 0 0 5px var(--neon-green); }
-        .neon-border-blue { border: 2px solid var(--neon-blue); box-shadow: 0 0 10px var(--neon-blue), inset 0 0 5px var(--neon-blue); }
+        .neon-border-darkgreen { border: 2px solid var(--neon-darkgreen); box-shadow: 0 0 10px var(--neon-darkgreen), inset 0 0 5px var(--neon-darkgreen); }
         .neon-border-purple { border: 2px solid var(--neon-purple); box-shadow: 0 0 10px var(--neon-purple), inset 0 0 5px var(--neon-purple); }
-        .neon-border-pink { border: 2px solid var(--neon-pink); box-shadow: 0 0 10px var(--neon-pink), inset 0 0 5px var(--neon-pink); }
+        .neon-border-orange { border: 2px solid var(--neon-orange); box-shadow: 0 0 10px var(--neon-orange), inset 0 0 5px var(--neon-orange); }
 
         .glow-red { text-shadow: 0 0 10px var(--neon-red); color: var(--neon-red); }
         .glow-yellow { text-shadow: 0 0 10px var(--neon-yellow); color: var(--neon-yellow); }
         .glow-green { text-shadow: 0 0 10px var(--neon-green); color: var(--neon-green); }
-        .glow-blue { text-shadow: 0 0 10px var(--neon-blue); color: var(--neon-blue); }
+        .glow-darkgreen { text-shadow: 0 0 10px var(--neon-darkgreen); color: var(--neon-darkgreen); }
         .glow-purple { text-shadow: 0 0 10px var(--neon-purple); color: var(--neon-purple); }
-        .glow-pink { text-shadow: 0 0 10px var(--neon-pink); color: var(--neon-pink); }
+        .glow-orange { text-shadow: 0 0 10px var(--neon-orange); color: var(--neon-orange); }
 
         /* Botón Aleatorio */
         .btn-neon {
@@ -99,7 +99,7 @@
         
         /* 1. Flicker Text (Letrero Neón) */
         @keyframes flicker {
-            0%, 18%, 22%, 25%, 53%, 57%, 100% { text-shadow: 0 0 20px #fff, 0 0 30px var(--neon-blue); opacity: 1; }
+            0%, 18%, 22%, 25%, 53%, 57%, 100% { text-shadow: 0 0 20px #fff, 0 0 30px var(--neon-darkgreen); opacity: 1; }
             20%, 24%, 55% { text-shadow: none; opacity: 0.5; }
         }
         .flicker-text { animation: flicker 5s infinite alternate; }
@@ -172,16 +172,16 @@
             <div class="flex flex-col md:flex-row justify-center items-center gap-5 mb-8 w-full px-4">
                 
                 <!-- Botón Modo (Theme) -->
-                <button id="theme-btn" onclick="toggleTheme()" class="relative flex items-center justify-center gap-3 px-8 py-3 rounded-full text-sm font-bold uppercase tracking-widest transition-all duration-300 w-full md:w-auto border border-[#ff00cc] text-[#ff00cc] shadow-[0_0_15px_rgba(255,0,204,0.2)] hover:shadow-[0_0_25px_rgba(255,0,204,0.5)] bg-black/50 backdrop-blur-sm group">
-                    <span id="theme-dot" class="w-2 h-2 rounded-full bg-[#ff00cc] shadow-[0_0_8px_#ff00cc] animate-pulse"></span>
+                <button id="theme-btn" onclick="toggleTheme()" class="relative flex items-center justify-center gap-3 px-8 py-3 rounded-full text-sm font-bold uppercase tracking-widest transition-all duration-300 w-full md:w-auto border border-[#ff8800] text-[#ff8800] shadow-[0_0_15px_rgba(255,136,0,0.2)] hover:shadow-[0_0_25px_rgba(255,136,0,0.5)] bg-black/50 backdrop-blur-sm group">
+                    <span id="theme-dot" class="w-2 h-2 rounded-full bg-[#ff8800] shadow-[0_0_8px_#ff8800] animate-pulse"></span>
                     <span id="theme-text">MODO PAREJAS</span>
                 </button>
 
                 <!-- Botón Aleatorio -->
-                <button onclick="showRandom()" class="relative group px-12 py-4 rounded-full font-bold uppercase tracking-[0.3em] overflow-hidden transition-all duration-300 hover:scale-105 active:scale-95 bg-black/60 backdrop-blur-md border border-[#00ccff] text-[#00ccff] shadow-[0_0_15px_rgba(0,204,255,0.3)] hover:shadow-[0_0_30px_rgba(0,204,255,0.6)] w-full md:w-auto">
-                    <span class="relative z-10 drop-shadow-[0_0_8px_rgba(0,204,255,0.8)] text-lg">ALEATORIO</span>
+                <button onclick="showRandom()" class="relative group px-12 py-4 rounded-full font-bold uppercase tracking-[0.3em] overflow-hidden transition-all duration-300 hover:scale-105 active:scale-95 bg-black/60 backdrop-blur-md border border-[#00aa44] text-[#00aa44] shadow-[0_0_15px_rgba(0,170,68,0.3)] hover:shadow-[0_0_30px_rgba(0,170,68,0.6)] w-full md:w-auto">
+                    <span class="relative z-10 drop-shadow-[0_0_8px_rgba(0,170,68,0.8)] text-lg">ALEATORIO</span>
                     <!-- Brillo interior hover -->
-                    <div class="absolute inset-0 bg-[#00ccff]/10 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500 ease-out"></div>
+                    <div class="absolute inset-0 bg-[#00aa44]/10 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500 ease-out"></div>
                     <!-- Haz de luz dinámico -->
                     <div class="absolute top-0 bottom-0 w-16 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-[150%] group-hover:animate-[sweep_1.2s_ease-in-out_infinite]"></div>
                 </button>
@@ -239,9 +239,9 @@
                 <button id="btn-red" onclick="filter('rojo', this)" class="filter-btn px-4 py-2 rounded border border-red-900 text-red-400 hover:bg-red-950 transition">Rojo (Spicy)</button>
                 <button onclick="filter('amarillo', this)" class="filter-btn px-4 py-2 rounded border border-yellow-900 text-yellow-400 hover:bg-yellow-950 transition">Amarillo</button>
                 <button onclick="filter('verde', this)" class="filter-btn px-4 py-2 rounded border border-green-900 text-green-400 hover:bg-green-950 transition">Verde</button>
-                <button onclick="filter('azul', this)" class="filter-btn px-4 py-2 rounded border border-blue-900 text-blue-400 hover:bg-blue-950 transition">Azul</button>
+                <button onclick="filter('verde_oscuro', this)" class="filter-btn px-4 py-2 rounded border border-emerald-900 text-emerald-400 hover:bg-emerald-950 transition">Verde Oscuro</button>
                 <button id="btn-purple" onclick="filter('morado', this)" class="filter-btn px-4 py-2 rounded border border-purple-900 text-purple-400 hover:bg-purple-950 transition">Morado (Pareja)</button>
-                <button onclick="filter('rosa', this)" class="filter-btn px-4 py-2 rounded border border-pink-900 text-pink-400 hover:bg-pink-950 transition">Rosa</button>
+                <button onclick="filter('naranja', this)" class="filter-btn px-4 py-2 rounded border border-orange-900 text-orange-400 hover:bg-orange-950 transition">Naranja</button>
             </div>
         </div>
 
@@ -265,7 +265,7 @@
     <!-- Footer -->
     <footer class="mt-auto py-8 text-center bg-black/40 border-t border-gray-900 w-full">
         <p id="download-btn" class="text-gray-600 text-[10px] uppercase tracking-tighter transition-all hover:text-gray-300 cursor-default select-none" onclick="downloadPDF()" title="Exportar a PDF">
-            v4.0.0 • party_mode_enabled • <span class="cursor-pointer hover:underline">sys_export_log_pdf</span>
+            v5.0.0 • party_mode_enabled • <span class="cursor-pointer hover:underline">sys_export_log_pdf</span>
         </p>
     </footer>
 
@@ -299,16 +299,16 @@
         </div>
     </div>
 
-    <!-- Timer Overlay Modal -->
-    <div id="timer-modal" class="random-overlay z-[200]">
+    <!-- FLOATING TIMER BACKGROUND (Widget) -->
+    <div id="floating-timer" class="fixed bottom-4 right-4 z-[200] bg-black/90 backdrop-blur-md border border-[#ffcc00] rounded-2xl p-5 shadow-[0_0_20px_rgba(255,204,0,0.3)] flex flex-col items-center justify-center transition-all duration-500 translate-y-[200%] opacity-0 pointer-events-auto">
         <div class="relative flex flex-col items-center justify-center">
-            <svg width="250" height="250" viewBox="0 0 250 250" class="timer-circle">
-                <circle cx="125" cy="125" r="110" fill="none" stroke="#222" stroke-width="12" />
-                <circle id="timer-progress" cx="125" cy="125" r="110" fill="none" stroke="#ffcc00" stroke-width="12" stroke-dasharray="691" stroke-dashoffset="0" stroke-linecap="round" style="filter: drop-shadow(0 0 10px #ffcc00);" />
+            <svg width="120" height="120" viewBox="0 0 120 120" class="timer-circle">
+                <circle cx="60" cy="60" r="50" fill="none" stroke="#222" stroke-width="8" />
+                <circle id="timer-progress" cx="60" cy="60" r="50" fill="none" stroke="#ffcc00" stroke-width="8" stroke-dasharray="314" stroke-dashoffset="0" stroke-linecap="round" style="filter: drop-shadow(0 0 5px #ffcc00);" />
             </svg>
-            <div id="timer-display" class="absolute text-6xl font-bold text-[#ffcc00] drop-shadow-[0_0_15px_rgba(255,204,0,0.8)] font-['Orbitron']">60</div>
-            <button onclick="closeTimer()" class="mt-8 px-6 py-2 bg-red-600/30 text-red-400 border border-red-500 rounded-full uppercase tracking-widest font-bold hover:bg-red-600/50 transition-all">Cancelar</button>
+            <div id="timer-display" class="absolute text-3xl font-bold text-[#ffcc00] drop-shadow-[0_0_10px_rgba(255,204,0,0.8)] font-['Orbitron']">60</div>
         </div>
+        <button onclick="closeTimer()" class="mt-4 px-5 py-1 text-xs bg-red-600/30 text-red-400 border border-red-500 rounded-full uppercase tracking-widest font-bold hover:bg-red-600/50 transition-all">Cancelar</button>
     </div>
 
     <script>
@@ -388,7 +388,7 @@
         // Mapas de color para las partículas
         const colorHexMap = {
             'rojo': '#ff0055', 'amarillo': '#ffcc00', 'verde': '#33ff00',
-            'azul': '#00ccff', 'morado': '#cc00ff', 'rosa': '#ff00cc'
+            'verde_oscuro': '#00aa44', 'morado': '#cc00ff', 'naranja': '#ff8800'
         };
 
         // =================================================================================
@@ -398,18 +398,18 @@
             { color: 'rojo', cat: 'Rojo (Spicy)', title: 'El Strip-Tease', text: 'Tienes que quedarte en ropa interior durante lo que tardeis en reconstuirlo.', glow: 'glow-red', hex: '#ff0055' },
             { color: 'amarillo', cat: 'Amarillo (Mental)', title: 'El Bloqueo', text: 'No puedes usar el móvil ni ver ninguna pantalla durante el resto de la noche.', glow: 'glow-yellow', hex: '#ffcc00' },
             { color: 'verde', cat: 'Verde (Acción)', title: 'La Estatua', text: 'Quédate en la posición incómoda que elija tu pareja durante 2 minutos seguidos.', glow: 'glow-green', hex: '#33ff00' },
-            { color: 'azul', cat: 'Azul (Confesiones)', title: 'El Pasado Vuelve', text: 'Cuenta la historia más vergonzosa de tu vida que nunca le hayas contado.', glow: 'glow-blue', hex: '#00ccff' },
+            { color: 'verde_oscuro', cat: 'Verde Oscuro (Confesiones)', title: 'El Pasado Vuelve', text: 'Cuenta la historia más vergonzosa de tu vida que nunca le hayas contado.', glow: 'glow-darkgreen', hex: '#00aa44' },
             { color: 'morado', cat: 'Morado (Pareja)', title: 'La Promesa de Oro', text: 'Comprométete a un plan que tu pareja elija para el mes que viene sin rechistar.', glow: 'glow-purple', hex: '#cc00ff' },
-            { color: 'rosa', cat: 'Rosa (Sorpresa)', title: 'El Limpiador Total', text: 'Te toca hacer la maleta de los dos cuando os vayáis o fregar todo.', glow: 'glow-pink', hex: '#ff00cc' }
+            { color: 'naranja', cat: 'Naranja (Sorpresa)', title: 'El Limpiador Total', text: 'Te toca hacer la maleta de los dos cuando os vayáis o fregar todo.', glow: 'glow-orange', hex: '#ff8800' }
         ];
 
         const couplesHardcoreFall = [
             { color: 'rojo', cat: 'Rojo (Spicy Extremo)', title: 'Al Desnudo', text: 'Tienes que jugar el resto de la partida completamente sin ropa.', glow: 'glow-red', hex: '#ff0055' },
             { color: 'amarillo', cat: 'Amarillo (Mental Extremo)', title: 'Ruleta Rusa de Chat', text: 'Tu pareja elige a un contacto tuyo y le envía el mensaje que quiera.', glow: 'glow-yellow', hex: '#ffcc00' },
             { color: 'verde', cat: 'Verde (Acción Extrema)', title: 'Esclavo/a por un día', text: 'Durante las próximas 24 horas, tu pareja tiene control absoluto sobre ti.', glow: 'glow-green', hex: '#33ff00' },
-            { color: 'azul', cat: 'Azul (Confesiones Extremas)', title: 'Caja Fuerte Abierta', text: 'Desbloquea tu móvil y dale a tu pareja 5 minutos para revisar lo que quiera.', glow: 'glow-blue', hex: '#00ccff' },
+            { color: 'verde_oscuro', cat: 'Verde Oscuro (Confesiones Extremas)', title: 'Caja Fuerte Abierta', text: 'Desbloquea tu móvil y dale a tu pareja 5 minutos para revisar lo que quiera.', glow: 'glow-darkgreen', hex: '#00aa44' },
             { color: 'morado', cat: 'Morado (Pareja Extrema)', title: 'La Verdad Duele', text: 'Di en voz alta la peor crisis que creíste que no superaríamos.', glow: 'glow-purple', hex: '#cc00ff' },
-            { color: 'rosa', cat: 'Rosa (Castigo Brutal)', title: 'El Gran Trago', text: 'Tienes que terminar tu bebida actual de un solo trago, o tomarte 3 chupitos.', glow: 'glow-pink', hex: '#ff00cc' }
+            { color: 'naranja', cat: 'Naranja (Castigo Brutal)', title: 'El Gran Trago', text: 'Tienes que terminar tu bebida actual de un solo trago, o tomarte 3 chupitos.', glow: 'glow-orange', hex: '#ff8800' }
         ];
 
         // ACTUALIZADO: 120 Retos Parejas Normal
@@ -480,27 +480,27 @@
             { color: 'verde', cat: 'Acción (Diversión)', text: 'Usa tu mano no dominante (la que no usas normalmente) durante las próximas 2 rondas.', border: 'neon-border-green', glow: 'glow-green' },
             { color: 'verde', cat: 'Acción (Diversión)', text: 'Intenta lamerte el codo. Si no puedes, dale un beso en la mejilla a tu pareja.', border: 'neon-border-green', glow: 'glow-green' },
 
-            // AZUL
-            { color: 'azul', cat: 'Confesiones (Conectar)', text: 'Confiesa algo que rompiste o estropeaste y nunca dijiste a nadie.', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones (Conectar)', text: '¿Qué es lo más amable que alguien ha hecho por ti en tu vida?', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones (Conectar)', text: '¿Qué talento inútil tienes que casi nadie sabe?', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones (Conectar)', text: 'Hazme el cumplido más honesto y profundo que se te ocurra ahora.', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones (Conectar)', text: '¿Cuál es el recuerdo más feliz que tienes de tu infancia?', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones (Conectar)', text: 'Si pudieras viajar a cualquier parte del mundo mañana, ¿a dónde iríamos?', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones (Conectar)', text: '¿Qué es lo que más te estresa en el día a día y cómo puedo ayudarte con eso?', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones (Conectar)', text: 'Cuéntame una fobia ridícula o miedo tonto que tenías de pequeño/a.', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones (Conectar)', text: '¿Cuál es el sueño más raro o divertido que has tenido conmigo?', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones (Conectar)', text: 'Si ganáramos la lotería mañana, ¿en qué gastarías el primer millón?', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones (Conectar)', text: '¿Qué es lo que más te gusta de nuestra rutina diaria?', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones (Conectar)', text: 'Confiesa un placer culpable (canción, película, comida) que te da vergüenza admitir.', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones (Conectar)', text: '¿Qué cualidad admiras más en mí y desearías tener tú?', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones (Conectar)', text: '¿Cuál ha sido el momento en el que te has sentido más orgulloso/a de ti mismo/a?', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones (Conectar)', text: 'Si pudieras cambiar una sola cosa del mundo, ¿cuál sería?', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones (Conectar)', text: '¿Qué es lo más atrevido o espontáneo que has hecho en tu vida?', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones (Conectar)', text: 'Si tuvieras un superpoder, ¿cuál elegirías y por qué?', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones (Conectar)', text: 'Cuéntame una anécdota divertida de tu época del colegio que nunca me hayas dicho.', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones (Conectar)', text: '¿Cuál es la lección más importante que has aprendido desde que estamos juntos?', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones (Conectar)', text: 'Dime algo que siempre has querido aprender a hacer pero nunca te has atrevido.', border: 'neon-border-blue', glow: 'glow-blue' },
+            // VERDE OSCURO (ANTES AZUL)
+            { color: 'verde_oscuro', cat: 'Confesiones (Conectar)', text: 'Confiesa algo que rompiste o estropeaste y nunca dijiste a nadie.', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones (Conectar)', text: '¿Qué es lo más amable que alguien ha hecho por ti en tu vida?', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones (Conectar)', text: '¿Qué talento inútil tienes que casi nadie sabe?', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones (Conectar)', text: 'Hazme el cumplido más honesto y profundo que se te ocurra ahora.', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones (Conectar)', text: '¿Cuál es el recuerdo más feliz que tienes de tu infancia?', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones (Conectar)', text: 'Si pudieras viajar a cualquier parte del mundo mañana, ¿a dónde iríamos?', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones (Conectar)', text: '¿Qué es lo que más te estresa en el día a día y cómo puedo ayudarte con eso?', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones (Conectar)', text: 'Cuéntame una fobia ridícula o miedo tonto que tenías de pequeño/a.', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones (Conectar)', text: '¿Cuál es el sueño más raro o divertido que has tenido conmigo?', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones (Conectar)', text: 'Si ganáramos la lotería mañana, ¿en qué gastarías el primer millón?', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones (Conectar)', text: '¿Qué es lo que más te gusta de nuestra rutina diaria?', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones (Conectar)', text: 'Confiesa un placer culpable (canción, película, comida) que te da vergüenza admitir.', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones (Conectar)', text: '¿Qué cualidad admiras más en mí y desearías tener tú?', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones (Conectar)', text: '¿Cuál ha sido el momento en el que te has sentido más orgulloso/a de ti mismo/a?', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones (Conectar)', text: 'Si pudieras cambiar una sola cosa del mundo, ¿cuál sería?', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones (Conectar)', text: '¿Qué es lo más atrevido o espontáneo que has hecho en tu vida?', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones (Conectar)', text: 'Si tuvieras un superpoder, ¿cuál elegirías y por qué?', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones (Conectar)', text: 'Cuéntame una anécdota divertida de tu época del colegio que nunca me hayas dicho.', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones (Conectar)', text: '¿Cuál es la lección más importante que has aprendido desde que estamos juntos?', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones (Conectar)', text: 'Dime algo que siempre has querido aprender a hacer pero nunca te has atrevido.', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
 
             // MORADO
             { color: 'morado', cat: 'Pareja (Historia)', text: 'Recrea en 30 segundos, actuando, cómo fue el día que nos conocimos.', border: 'neon-border-purple', glow: 'glow-purple' },
@@ -524,27 +524,27 @@
             { color: 'morado', cat: 'Pareja (Historia)', text: 'Si tuviéramos que repetir un solo día de nuestra relación desde cero, ¿cuál elegirías?', border: 'neon-border-purple', glow: 'glow-purple' },
             { color: 'morado', cat: 'Pareja (Historia)', text: 'Adivina qué es lo que más me gusta de ti, tanto física como mentalmente.', border: 'neon-border-purple', glow: 'glow-purple' },
 
-            // ROSA
-            { color: 'rosa', cat: 'Sorpresas y Regalos', text: 'Te toca preparar el desayuno para los dos mañana por la mañana.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Sorpresas y Regalos', text: 'Comodín: Vale por un Masaje de 15 min cuando tú quieras pedirlo.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Sorpresas y Regalos', text: 'Sorpresa: Inmunidad. Si tiras la torre no hay castigo final para ti.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Sorpresas y Regalos', text: 'Castigo: Prohibido tocar el móvil hasta mañana (salvo emergencias).', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Sorpresas y Regalos', text: 'Te toca fregar los platos o cargar/descargar el lavavajillas en la próxima comida.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Sorpresas y Regalos', text: 'Tienes el control absoluto del mando de la tele/Netflix para la próxima película o serie.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Sorpresas y Regalos', text: 'Comodín: Vale por un favor sin preguntas. (Guárdalo para cuando lo necesites).', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Sorpresas y Regalos', text: 'Castigo: Pierdes tu próximo turno. Tu pareja debe sacar dos bloques seguidos.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Sorpresas y Regalos', text: 'Tienes que hablar susurrando (como en una biblioteca) durante las próximas 3 rondas.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Sorpresas y Regalos', text: 'Te toca hacer la cama de los dos todos los días durante la próxima semana.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Sorpresas y Regalos', text: 'Comodín: Vale por elegir qué cenamos y dónde pedimos el próximo fin de semana.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Sorpresas y Regalos', text: 'Cambio de sentido: Si sacas este bloque, vuelve a tocarte a ti inmediatamente.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Sorpresas y Regalos', text: 'Te toca ir a prepararle la bebida o el snack favorito a tu pareja ahora mismo.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Sorpresas y Regalos', text: 'Castigo: No puedes usar la letra "S" en la próxima ronda. Si te equivocas, sacas otro bloque extra.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Sorpresas y Regalos', text: 'Sorpresa: Tu pareja te debe un abrazo de oso de 1 minuto de duración.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Sorpresas y Regalos', text: 'Castigo: Tienes que jugar tapándote un ojo con la mano hasta tu próximo turno.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Sorpresas y Regalos', text: 'Comodín: Vale por 10 minutos de caricias en la cabeza o la espalda mientras vemos la tele.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Sorpresas y Regalos', text: 'Te toca decidir la próxima canción o playlist que suene de fondo.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Sorpresas y Regalos', text: 'Sorpresa: Cambia el bloque que ibas a sacar por uno más fácil sin penalización.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Sorpresas y Regalos', text: 'Castigo: Debes decir "Te quiero mucho" con voz de robot cada vez que saques un bloque.', border: 'neon-border-pink', glow: 'glow-pink' }
+            // NARANJA (ANTES ROSA)
+            { color: 'naranja', cat: 'Sorpresas y Regalos', text: 'Te toca preparar el desayuno para los dos mañana por la mañana.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Sorpresas y Regalos', text: 'Comodín: Vale por un Masaje de 15 min cuando tú quieras pedirlo.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Sorpresas y Regalos', text: 'Sorpresa: Inmunidad. Si tiras la torre no hay castigo final para ti.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Sorpresas y Regalos', text: 'Castigo: Prohibido tocar el móvil hasta mañana (salvo emergencias).', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Sorpresas y Regalos', text: 'Te toca fregar los platos o cargar/descargar el lavavajillas en la próxima comida.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Sorpresas y Regalos', text: 'Tienes el control absoluto del mando de la tele/Netflix para la próxima película o serie.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Sorpresas y Regalos', text: 'Comodín: Vale por un favor sin preguntas. (Guárdalo para cuando lo necesites).', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Sorpresas y Regalos', text: 'Castigo: Pierdes tu próximo turno. Tu pareja debe sacar dos bloques seguidos.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Sorpresas y Regalos', text: 'Tienes que hablar susurrando (como en una biblioteca) durante las próximas 3 rondas.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Sorpresas y Regalos', text: 'Te toca hacer la cama de los dos todos los días durante la próxima semana.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Sorpresas y Regalos', text: 'Comodín: Vale por elegir qué cenamos y dónde pedimos el próximo fin de semana.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Sorpresas y Regalos', text: 'Cambio de sentido: Si sacas este bloque, vuelve a tocarte a ti inmediatamente.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Sorpresas y Regalos', text: 'Te toca ir a prepararle la bebida o el snack favorito a tu pareja ahora mismo.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Sorpresas y Regalos', text: 'Castigo: No puedes usar la letra "S" en la próxima ronda. Si te equivocas, sacas otro bloque extra.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Sorpresas y Regalos', text: 'Sorpresa: Tu pareja te debe un abrazo de oso de 1 minuto de duración.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Sorpresas y Regalos', text: 'Castigo: Tienes que jugar tapándote un ojo con la mano hasta tu próximo turno.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Sorpresas y Regalos', text: 'Comodín: Vale por 10 minutos de caricias en la cabeza o la espalda mientras vemos la tele.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Sorpresas y Regalos', text: 'Te toca decidir la próxima canción o playlist que suene de fondo.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Sorpresas y Regalos', text: 'Sorpresa: Cambia el bloque que ibas a sacar por uno más fácil sin penalización.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Sorpresas y Regalos', text: 'Castigo: Debes decir "Te quiero mucho" con voz de robot cada vez que saques un bloque.', border: 'neon-border-orange', glow: 'glow-orange' }
         ];
 
         const couplesHardcoreChallenges = [
@@ -614,27 +614,27 @@
             { color: 'verde', cat: 'Acción Extrema', text: 'Deja que tu pareja te huela las axilas y te ponga nota del 1 al 10 en higiene en este momento.', border: 'neon-border-green', glow: 'glow-green' },
             { color: 'verde', cat: 'Acción Extrema', text: 'Actúa como el perro de tu pareja durante 3 minutos (a cuatro patas, ladrando y pidiendo mimos).', border: 'neon-border-green', glow: 'glow-green' },
 
-            // AZUL
-            { color: 'azul', cat: 'Confesiones Extremas', text: 'Confiesa la mentira más grande que le has dicho a tu pareja desde que os conocéis.', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones Extremas', text: '¿Alguna vez te ha atraído alguien de nuestro círculo cercano de amigos? ¿Quién?', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones Extremas', text: 'Si tuvieras "un pase libre" para 1 noche sin que yo me enfadara jamás, ¿a quién elegirías?', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones Extremas', text: '¿Qué es lo más egoísta o tóxico que has hecho en una relación pasada?', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones Extremas', text: 'Confiesa un secreto sexual o fetiche que te da vergüenza pedirme en la cama.', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones Extremas', text: '¿Alguna vez has pensado en serme infiel, aunque fuera por un milisegundo en una mala racha?', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones Extremas', text: '¿Cuál es la mejor/peor fantasía que has tenido con alguien que no soy yo estando juntos?', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones Extremas', text: 'Dime el nombre de una persona con la que te arrepientes profundamente de haberte acostado.', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones Extremas', text: '¿Has borrado alguna vez un mensaje o chat en tu móvil specifically para que yo no lo viera?', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones Extremas', text: '¿Alguna vez has fingido que te gustaba algo en la cama solo por no herir mi ego?', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones Extremas', text: '¿Quién de mis amigos/as te parece el más atractivo/a físicamente hablando?', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones Extremas', text: 'Si pudieras borrar de tu memoria un momento sexual desastroso nuestro, ¿cuál sería?', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones Extremas', text: 'Confiesa el pensamiento más oscuro o de ruptura que has tenido durante una discusión fuerte.', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones Extremas', text: '¿Alguna vez has buscado o "stalkeado" a un/a ex en redes sociales estando conmigo por simple curiosidad?', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones Extremas', text: 'Dime algo que hago o digo en la cama que a veces te corta el rollo.', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones Extremas', text: 'Si tuviéramos que hacer un trío obligatoriamente mañana, ¿a qué persona conocida por ambos elegirías?', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones Extremas', text: 'Sé sincero/a: ¿Has mirado alguna vez mi móvil a escondidas cuando yo no estaba?', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones Extremas', text: '¿Qué es lo más "sucio" o raro que has buscado en páginas para adultos en el último mes?', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones Extremas', text: 'Confiesa cuál ha sido la peor cita que tuvimos al principio de conocernos y por qué la odiaste.', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones Extremas', text: '¿Qué secreto te llevarías a la tumba antes que contármelo a mí? (Al menos da una pista del tema).', border: 'neon-border-blue', glow: 'glow-blue' },
+            // VERDE OSCURO (ANTES AZUL)
+            { color: 'verde_oscuro', cat: 'Confesiones Extremas', text: 'Confiesa la mentira más grande que le has dicho a tu pareja desde que os conocéis.', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones Extremas', text: '¿Alguna vez te ha atraído alguien de nuestro círculo cercano de amigos? ¿Quién?', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones Extremas', text: 'Si tuvieras "un pase libre" para 1 noche sin que yo me enfadara jamás, ¿a quién elegirías?', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones Extremas', text: '¿Qué es lo más egoísta o tóxico que has hecho en una relación pasada?', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones Extremas', text: 'Confiesa un secreto sexual o fetiche que te da vergüenza pedirme en la cama.', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones Extremas', text: '¿Alguna vez has pensado en serme infiel, aunque fuera por un milisegundo en una mala racha?', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones Extremas', text: '¿Cuál es la mejor/peor fantasía que has tenido con alguien que no soy yo estando juntos?', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones Extremas', text: 'Dime el nombre de una persona con la que te arrepientes profundamente de haberte acostado.', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones Extremas', text: '¿Has borrado alguna vez un mensaje o chat en tu móvil specifically para que yo no lo viera?', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones Extremas', text: '¿Alguna vez has fingido que te gustaba algo en la cama solo por no herir mi ego?', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones Extremas', text: '¿Quién de mis amigos/as te parece el más atractivo/a físicamente hablando?', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones Extremas', text: 'Si pudieras borrar de tu memoria un momento sexual desastroso nuestro, ¿cuál sería?', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones Extremas', text: 'Confiesa el pensamiento más oscuro o de ruptura que has tenido durante una discusión fuerte.', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones Extremas', text: '¿Alguna vez has buscado o "stalkeado" a un/a ex en redes sociales estando conmigo por simple curiosidad?', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones Extremas', text: 'Dime algo que hago o digo en la cama que a veces te corta el rollo.', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones Extremas', text: 'Si tuviéramos que hacer un trío obligatoriamente mañana, ¿a qué persona conocida por ambos elegirías?', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones Extremas', text: 'Sé sincero/a: ¿Has mirado alguna vez mi móvil a escondidas cuando yo no estaba?', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones Extremas', text: '¿Qué es lo más "sucio" o raro que has buscado en páginas para adultos en el último mes?', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones Extremas', text: 'Confiesa cuál ha sido la peor cita que tuvimos al principio de conocernos y por qué la odiaste.', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones Extremas', text: '¿Qué secreto te llevarías a la tumba antes que contármelo a mí? (Al menos da una pista del tema).', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
 
             // MORADO
             { color: 'morado', cat: 'Pareja Extrema', text: 'Del 1 al 10, puntúa nuestra vida íntima actualmente. ¿Qué falta exactamente para el 10?', border: 'neon-border-purple', glow: 'glow-purple' },
@@ -658,27 +658,27 @@
             { color: 'morado', cat: 'Pareja Extrema', text: '¿Cuál es mi peor defecto como pareja a la hora de resolver discusiones o peleas?', border: 'neon-border-purple', glow: 'glow-purple' },
             { color: 'morado', cat: 'Pareja Extrema', text: 'Si mis amigos te preguntaran en secreto qué es lo peor de vivir/estar conmigo, ¿qué les dirías?', border: 'neon-border-purple', glow: 'glow-purple' },
 
-            // ROSA
-            { color: 'rosa', cat: 'Castigos Brutales', text: 'Bebe 2 vasos enteros de agua o 1 vaso entero de tu bebida alcohólica ahora mismo.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Castigos Brutales', text: 'Paga la próxima cena cara (mínimo 50€). Sin excusas ni dividir la cuenta.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Castigos Brutales', text: 'Haz de sirviente: debes servir las bebidas, recoger la basura y guardar el juego al terminar.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Castigos Brutales', text: 'Si tiras la torre de Jenga hoy, tu pareja elige toda tu ropa de mañana para salir a la calle.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Castigos Brutales', text: 'Trago doble por castigo: bebes tú un trago largo y tienes que darle a tu pareja el doble de lo que has bebido.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Castigos Brutales', text: 'Castigo de Placer: Tienes prohibido tener orgasmos esta noche (tu pareja puede provocarte, pero tú no puedes terminar).', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Castigos Brutales', text: 'Durante las próximas 48 horas, tú eres el único encargado/a de limpiar la casa y hacer las comidas.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Castigos Brutales', text: 'Tu pareja tiene permiso para usar tu tarjeta de crédito ahora mismo para una compra online de hasta 20€.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Castigos Brutales', text: 'Pasa tus próximos 3 turnos de Jenga de rodillas en el suelo y en absoluto silencio.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Castigos Brutales', text: 'Hazle un masaje de pies a tu pareja durante 10 minutos con loción o aceite.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Castigos Brutales', text: 'Pierdes tu turno actual y debes beberte un chupito de la mezcla más asquerosa que invente tu pareja con lo que haya en la mesa/nevera.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Castigos Brutales', text: 'Prohibido usar tus redes sociales hasta mañana por la noche. Tu pareja se queda con tu móvil si es necesario.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Castigos Brutales', text: 'Comodín de Sumisión: En la próxima discusión real que tengamos, tú automáticamente nos das la razón a mí y te disculpas.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Castigos Brutales', text: 'Escríbele a tu pareja una carta de amor hiper-romántica de 200 palabras y súbela a tus redes o envíasela por WhatsApp ahora.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Castigos Brutales', text: 'Tienes que dormir en el lado de la cama que no te gusta esta noche (o directamente en el sofá).', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Castigos Brutales', text: 'Permite que tu pareja te tire un vaso entero de agua directamente a la cara sin apartarte.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Castigos Brutales', text: 'Te comprometes a preparar el desayuno en la cama para tu pareja mañana por la mañana sin que te lo tenga que pedir.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Castigos Brutales', text: 'Tu pareja elige tu foto de perfil de WhatsApp e Instagram durante 3 días enteros.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Castigos Brutales', text: 'Eres el "cenicero/papelera": si tu pareja quiere tirar algo o necesita servilletas, tú debes ocuparte todo el rato.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Castigos Brutales', text: 'La Deuda: Si la torre cae en tus próximos 2 turnos, le debes a tu pareja un fin de semana entero de "Sí a todo lo que me pidas".', border: 'neon-border-pink', glow: 'glow-pink' }
+            // NARANJA (ANTES ROSA)
+            { color: 'naranja', cat: 'Castigos Brutales', text: 'Bebe 2 vasos enteros de agua o 1 vaso entero de tu bebida alcohólica ahora mismo.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Castigos Brutales', text: 'Paga la próxima cena cara (mínimo 50€). Sin excusas ni dividir la cuenta.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Castigos Brutales', text: 'Haz de sirviente: debes servir las bebidas, recoger la basura y guardar el juego al terminar.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Castigos Brutales', text: 'Si tiras la torre de Jenga hoy, tu pareja elige toda tu ropa de mañana para salir a la calle.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Castigos Brutales', text: 'Trago doble por castigo: bebes tú un trago largo y tienes que darle a tu pareja el doble de lo que has bebido.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Castigos Brutales', text: 'Castigo de Placer: Tienes prohibido tener orgasmos esta noche (tu pareja puede provocarte, pero tú no puedes terminar).', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Castigos Brutales', text: 'Durante las próximas 48 horas, tú eres el único encargado/a de limpiar la casa y hacer las comidas.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Castigos Brutales', text: 'Tu pareja tiene permiso para usar tu tarjeta de crédito ahora mismo para una compra online de hasta 20€.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Castigos Brutales', text: 'Pasa tus próximos 3 turnos de Jenga de rodillas en el suelo y en absoluto silencio.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Castigos Brutales', text: 'Hazle un masaje de pies a tu pareja durante 10 minutos con loción o aceite.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Castigos Brutales', text: 'Pierdes tu turno actual y debes beberte un chupito de la mezcla más asquerosa que invente tu pareja con lo que haya en la mesa/nevera.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Castigos Brutales', text: 'Prohibido usar tus redes sociales hasta mañana por la noche. Tu pareja se queda con tu móvil si es necesario.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Castigos Brutales', text: 'Comodín de Sumisión: En la próxima discusión real que tengamos, tú automáticamente nos das la razón a mí y te disculpas.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Castigos Brutales', text: 'Escríbele a tu pareja una carta de amor hiper-romántica de 200 palabras y súbela a tus redes o envíasela por WhatsApp ahora.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Castigos Brutales', text: 'Tienes que dormir en el lado de la cama que no te gusta esta noche (o directamente en el sofá).', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Castigos Brutales', text: 'Permite que tu pareja te tire un vaso entero de agua directamente a la cara sin apartarte.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Castigos Brutales', text: 'Te comprometes a preparar el desayuno en la cama para tu pareja mañana por la mañana sin que te lo tenga que pedir.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Castigos Brutales', text: 'Tu pareja elige tu foto de perfil de WhatsApp e Instagram durante 3 días enteros.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Castigos Brutales', text: 'Eres el "cenicero/papelera": si tu pareja quiere tirar algo o necesita servilletas, tú debes ocuparte todo el rato.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Castigos Brutales', text: 'La Deuda: Si la torre cae en tus próximos 2 turnos, le debes a tu pareja un fin de semana entero de "Sí a todo lo que me pidas".', border: 'neon-border-orange', glow: 'glow-orange' }
         ];
 
         // =================================================================================
@@ -688,18 +688,18 @@
             { color: 'rojo', cat: 'Rojo (Beber)', title: 'Fondo Castigo', text: 'Tienes que acabarte tu bebida entera ahora mismo o la de la persona a tu derecha.', glow: 'glow-red', hex: '#ff0055' },
             { color: 'amarillo', cat: 'Amarillo (Mental)', title: 'La Ley del Silencio', text: 'Estás mudo/a durante los próximos 5 turnos. Si hablas, bebes.', glow: 'glow-yellow', hex: '#ffcc00' },
             { color: 'verde', cat: 'Verde (Acción)', title: 'El Camarero', text: 'Eres el sirviente del grupo. Tienes que rellenar los vasos de todos hasta tu próximo turno.', glow: 'glow-green', hex: '#33ff00' },
-            { color: 'azul', cat: 'Azul (Confesiones)', title: 'Vergüenza Pública', text: 'Di en voz alta lo más vergonzoso que te ha pasado estando de fiesta.', glow: 'glow-blue', hex: '#00ccff' },
+            { color: 'verde_oscuro', cat: 'Verde Oscuro (Confesiones)', title: 'Vergüenza Pública', text: 'Di en voz alta lo más vergonzoso que te ha pasado estando de fiesta.', glow: 'glow-darkgreen', hex: '#00aa44' },
             { color: 'morado', cat: 'Morado (El Grupo)', title: 'El Esclavo', text: 'Hazle un masaje en los hombros al jugador a tu derecha durante 2 minutos.', glow: 'glow-purple', hex: '#cc00ff' },
-            { color: 'rosa', cat: 'Rosa (Castigo)', title: 'Destino a Ciegas', text: 'La persona a tu izquierda elige un castigo razonable para ti. No puedes negarte.', glow: 'glow-pink', hex: '#ff00cc' }
+            { color: 'naranja', cat: 'Naranja (Castigo)', title: 'Destino a Ciegas', text: 'La persona a tu izquierda elige un castigo razonable para ti. No puedes negarte.', glow: 'glow-orange', hex: '#ff8800' }
         ];
 
         const friendsHardcoreFall = [
             { color: 'rojo', cat: 'Rojo (Beber Extremo)', title: 'Mezcla Mortal', text: 'Todos echan un chorro de su bebida en un vaso y te lo bebes de un trago.', glow: 'glow-red', hex: '#ff0055' },
             { color: 'amarillo', cat: 'Amarillo (Mental Extremo)', title: 'Ruleta Rusa Telefónica', text: 'Desbloquea tu móvil y déjalo en el centro. El grupo elige a quién mandarle un mensaje.', glow: 'glow-yellow', hex: '#ffcc00' },
             { color: 'verde', cat: 'Verde (Acción Extrema)', title: 'Lienzo Humano', text: 'El grupo tiene 1 minuto para pintarte la cara o los brazos con un rotulador.', glow: 'glow-green', hex: '#33ff00' },
-            { color: 'azul', cat: 'Azul (Confesiones Extremas)', title: 'Verdad Dolorosa', text: 'Confiesa qué persona de este grupo te saca de quicio a veces y por qué.', glow: 'glow-blue', hex: '#00ccff' },
+            { color: 'verde_oscuro', cat: 'Verde Oscuro (Confesiones Extremas)', title: 'Verdad Dolorosa', text: 'Confiesa qué persona de este grupo te saca de quicio a veces y por qué.', glow: 'glow-darkgreen', hex: '#00aa44' },
             { color: 'morado', cat: 'Morado (Grupo Extremo)', title: 'La Cuenta', text: 'Si pedís comida hoy o pagáis una ronda luego, tú invitas la mayor parte.', glow: 'glow-purple', hex: '#cc00ff' },
-            { color: 'rosa', cat: 'Rosa (Castigo Brutal)', title: 'El Gran Trago', text: 'Fondo blanco de tu copa y además das 5 vueltas sobre ti mismo.', glow: 'glow-pink', hex: '#ff00cc' }
+            { color: 'naranja', cat: 'Naranja (Castigo Brutal)', title: 'El Gran Trago', text: 'Fondo blanco de tu copa y además das 5 vueltas sobre ti mismo.', glow: 'glow-orange', hex: '#ff8800' }
         ];
 
         const friendsNormalChallenges = [
@@ -754,22 +754,22 @@
             { color: 'verde', cat: 'Acción (Diversión)', text: 'Quédate debajo de la mesa hasta que sea tu próximo turno.', border: 'neon-border-green', glow: 'glow-green' },
             { color: 'verde', cat: 'Acción (Diversión)', text: 'Haz una plancha (plank) abdominal de 45 segundos.', border: 'neon-border-green', glow: 'glow-green' },
 
-            // AZUL
-            { color: 'azul', cat: 'Confesiones (Amigos)', text: 'Cuenta la historia de la peor cita o ligue que has tenido.', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones (Amigos)', text: '¿Quién del grupo crees que tiene el gusto musical más raro?', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones (Amigos)', text: 'Confiesa una mentira tonta que le hayas dicho a tus amigos últimamente.', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones (Amigos)', text: 'Dime una opinión impopular que defiendas a muerte.', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones (Amigos)', text: '¿Quién fue tu primer amor platónico o famoso?', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones (Amigos)', text: '¿Qué es lo más raro que has buscado en Google en la última semana?', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones (Amigos)', text: '¿Cuál es tu mayor miedo irracional?', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones (Amigos)', text: '¿Alguna vez has robado algo pequeño (un mechero, un caramelo...)?', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones (Amigos)', text: '¿Cuál es el mensaje de texto más vergonzoso que has enviado por error?', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones (Amigos)', text: '¿Qué es lo primero que harías si fueras invisible por un día?', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones (Amigos)', text: '¿Cuál es la peor película que has visto en tu vida?', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones (Amigos)', text: '¿Quién es la persona más famosa que has llegado a conocer en persona?', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones (Amigos)', text: 'Cuenta brevemente tu peor borrachera histórica.', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones (Amigos)', text: 'Si pudieras cambiar de vida con alguien del grupo por un día, ¿con quién sería?', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones (Amigos)', text: '¿Qué es lo que más te gusta de tu personalidad?', border: 'neon-border-blue', glow: 'glow-blue' },
+            // VERDE OSCURO (ANTES AZUL)
+            { color: 'verde_oscuro', cat: 'Confesiones (Amigos)', text: 'Cuenta la historia de la peor cita o ligue que has tenido.', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones (Amigos)', text: '¿Quién del grupo crees que tiene el gusto musical más raro?', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones (Amigos)', text: 'Confiesa una mentira tonta que le hayas dicho a tus amigos últimamente.', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones (Amigos)', text: 'Dime una opinión impopular que defiendas a muerte.', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones (Amigos)', text: '¿Quién fue tu primer amor platónico o famoso?', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones (Amigos)', text: '¿Qué es lo más raro que has buscado en Google en la última semana?', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones (Amigos)', text: '¿Cuál es tu mayor miedo irracional?', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones (Amigos)', text: '¿Alguna vez has robado algo pequeño (un mechero, un caramelo...)?', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones (Amigos)', text: '¿Cuál es el mensaje de texto más vergonzoso que has enviado por error?', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones (Amigos)', text: '¿Qué es lo primero que harías si fueras invisible por un día?', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones (Amigos)', text: '¿Cuál es la peor película que has visto en tu vida?', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones (Amigos)', text: '¿Quién es la persona más famosa que has llegado a conocer en persona?', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones (Amigos)', text: 'Cuenta brevemente tu peor borrachera histórica.', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones (Amigos)', text: 'Si pudieras cambiar de vida con alguien del grupo por un día, ¿con quién sería?', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones (Amigos)', text: '¿Qué es lo que más te gusta de tu personalidad?', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
 
             // MORADO
             { color: 'morado', cat: 'El Grupo (Salseo)', text: 'Señala a la persona del grupo más probable a terminar en la cárcel.', border: 'neon-border-purple', glow: 'glow-purple' },
@@ -788,22 +788,22 @@
             { color: 'morado', cat: 'El Grupo (Salseo)', text: 'Si tuviéramos que elegir a un líder del grupo, ¿quién sería?', border: 'neon-border-purple', glow: 'glow-purple' },
             { color: 'morado', cat: 'El Grupo (Salseo)', text: '¿Quién del grupo tiene el mejor sentido del humor?', border: 'neon-border-purple', glow: 'glow-purple' },
 
-            // ROSA
-            { color: 'rosa', cat: 'Sorpresas y Reglas', text: 'Creador de reglas: Inventa una regla. Quien la rompa de aquí al final, bebe.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Sorpresas y Reglas', text: 'Cambio de sentido: El turno pasa al jugador que acaba de tirar.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Sorpresas y Reglas', text: 'Comodín: Sáltate tu próximo turno de Jenga.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Sorpresas y Reglas', text: 'Inmunidad: No bebes nada durante las próximas 2 rondas seguidas.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Sorpresas y Reglas', text: 'Modo Estatua: Cuando tú quieras, quédate quieto. El último en imitarte, bebe.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Sorpresas y Reglas', text: 'Intercambia de sitio físico con cualquier otro jugador.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Sorpresas y Reglas', text: 'El jugador a tu derecha debe beber tu próximo castigo por ti.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Sorpresas y Reglas', text: 'Elige una "palabra prohibida". Cualquiera que la diga debe beber un trago.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Sorpresas y Reglas', text: 'Tienes que beber cada vez que alguien del grupo use su móvil.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Sorpresas y Reglas', text: 'Regala 5 tragos a una sola persona de tu elección.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Sorpresas y Reglas', text: 'Inmunidad de Verdad: Puedes negarte a responder una pregunta de la categoría Azul.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Sorpresas y Reglas', text: 'Todos beben si alguien se ríe en el próximo minuto. Tú incluido.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Sorpresas y Reglas', text: 'Cambia el nombre de todos por nombres de frutas por una ronda. Quien falle, bebe.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Sorpresas y Reglas', text: 'Tienes 3 vidas. Cada vez que alguien te haga reír, pierdes una. Si las pierdes, bebes un vaso.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Sorpresas y Reglas', text: 'Esclavo del brindis: Debes proponer un brindis diferente cada vez que alguien beba.', border: 'neon-border-pink', glow: 'glow-pink' }
+            // NARANJA (ANTES ROSA)
+            { color: 'naranja', cat: 'Sorpresas y Reglas', text: 'Creador de reglas: Inventa una regla. Quien la rompa de aquí al final, bebe.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Sorpresas y Reglas', text: 'Cambio de sentido: El turno pasa al jugador que acaba de tirar.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Sorpresas y Reglas', text: 'Comodín: Sáltate tu próximo turno de Jenga.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Sorpresas y Reglas', text: 'Inmunidad: No bebes nada durante las próximas 2 rondas seguidas.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Sorpresas y Reglas', text: 'Modo Estatua: Cuando tú quieras, quédate quieto. El último en imitarte, bebe.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Sorpresas y Reglas', text: 'Intercambia de sitio físico con cualquier otro jugador.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Sorpresas y Reglas', text: 'El jugador a tu derecha debe beber tu próximo castigo por ti.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Sorpresas y Reglas', text: 'Elige una "palabra prohibida". Cualquiera que la diga debe beber un trago.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Sorpresas y Reglas', text: 'Tienes que beber cada vez que alguien del grupo use su móvil.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Sorpresas y Reglas', text: 'Regala 5 tragos a una sola persona de tu elección.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Sorpresas y Reglas', text: 'Inmunidad de Verdad: Puedes negarte a responder una pregunta de la categoría Verde Oscuro.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Sorpresas y Reglas', text: 'Todos beben si alguien se ríe en el próximo minuto. Tú incluido.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Sorpresas y Reglas', text: 'Cambia el nombre de todos por nombres de frutas por una ronda. Quien falle, bebe.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Sorpresas y Reglas', text: 'Tienes 3 vidas. Cada vez que alguien te haga reír, pierdes una. Si las pierdes, bebes un vaso.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Sorpresas y Reglas', text: 'Esclavo del brindis: Debes proponer un brindis diferente cada vez que alguien beba.', border: 'neon-border-orange', glow: 'glow-orange' }
         ];
 
         const friendsHardcoreChallenges = [
@@ -858,22 +858,22 @@
             { color: 'verde', cat: 'Acción Extrema', text: 'Olfatea los pies de la persona que tienes a tu derecha.', border: 'neon-border-green', glow: 'glow-green' },
             { color: 'verde', cat: 'Acción Extrema', text: 'Tienes que jugar las próximas 2 rondas en ropa interior.', border: 'neon-border-green', glow: 'glow-green' },
 
-            // AZUL
-            { color: 'azul', cat: 'Confesiones Extremas', text: '¿Con quién de este grupo tendrías algo si no hubiera consecuencias?', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones Extremas', text: '¿Qué es lo más ilegal o inmoral que has hecho en tu vida?', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones Extremas', text: 'Confiesa un secreto que si tu familia lo supiera, se decepcionaría profundamente.', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones Extremas', text: 'Dime la peor cosa que has dicho a espaldas de alguien de este grupo.', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones Extremas', text: '¿A quién de los presentes besarías ahora mismo si te obligaran?', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones Extremas', text: '¿Qué es lo más asqueroso que has llegado a hacer en la intimidad?', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones Extremas', text: '¿Alguna vez has engañado a una pareja sentimental? Sé honesto.', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones Extremas', text: '¿Quién es la persona que peor te cae de los que están aquí sentados?', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones Extremas', text: '¿Cuál es tu mayor inseguridad física que nadie conoce?', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones Extremas', text: '¿Qué es lo más vergonzoso que has hecho estando totalmente sobrio?', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones Extremas', text: '¿Alguna vez has fingido un orgasmo?', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones Extremas', text: '¿Quién fue la última persona con la que te acostaste y cuándo?', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones Extremas', text: '¿De qué acción en tu vida te arrepientes más hasta el día de hoy?', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones Extremas', text: '¿Has mentido en alguna de las respuestas que has dado en este juego hoy?', border: 'neon-border-blue', glow: 'glow-blue' },
-            { color: 'azul', cat: 'Confesiones Extremas', text: '¿Cuál es el secreto más oscuro que sabes de otra persona de este grupo?', border: 'neon-border-blue', glow: 'glow-blue' },
+            // VERDE OSCURO (ANTES AZUL)
+            { color: 'verde_oscuro', cat: 'Confesiones Extremas', text: '¿Con quién de este grupo tendrías algo si no hubiera consecuencias?', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones Extremas', text: '¿Qué es lo más ilegal o inmoral que has hecho en tu vida?', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones Extremas', text: 'Confiesa un secreto que si tu familia lo supiera, se decepcionaría profundamente.', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones Extremas', text: 'Dime la peor cosa que has dicho a espaldas de alguien de este grupo.', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones Extremas', text: '¿A quién de los presentes besarías ahora mismo si te obligaran?', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones Extremas', text: '¿Qué es lo más asqueroso que has llegado a hacer en la intimidad?', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones Extremas', text: '¿Alguna vez has engañado a una pareja sentimental? Sé honesto.', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones Extremas', text: '¿Quién es la persona que peor te cae de los que están aquí sentados?', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones Extremas', text: '¿Cuál es tu mayor inseguridad física que nadie conoce?', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones Extremas', text: '¿Qué es lo más vergonzoso que has hecho estando totalmente sobrio?', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones Extremas', text: '¿Alguna vez has fingido un orgasmo?', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones Extremas', text: '¿Quién fue la última persona con la que te acostaste y cuándo?', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones Extremas', text: '¿De qué acción en tu vida te arrepientes más hasta el día de hoy?', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones Extremas', text: '¿Has mentido en alguna de las respuestas que has dado en este juego hoy?', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
+            { color: 'verde_oscuro', cat: 'Confesiones Extremas', text: '¿Cuál es el secreto más oscuro que sabes de otra persona de este grupo?', border: 'neon-border-darkgreen', glow: 'glow-darkgreen' },
 
             // MORADO
             { color: 'morado', cat: 'Grupo Extremo', text: 'Critica de forma dura y honesta a la persona a tu derecha.', border: 'neon-border-purple', glow: 'glow-purple' },
@@ -892,22 +892,22 @@
             { color: 'morado', cat: 'Grupo Extremo', text: '¿Quién crees que tiene el peor gusto vistiendo de todos nosotros?', border: 'neon-border-purple', glow: 'glow-purple' },
             { color: 'morado', cat: 'Grupo Extremo', text: '¿Quién es el más propenso a traicionar al grupo por una gran suma de dinero?', border: 'neon-border-purple', glow: 'glow-purple' },
 
-            // ROSA
-            { color: 'rosa', cat: 'Castigos Brutales', text: 'Objetivo: Cualquier trago que alguien deba tomar, puede pasártelo a ti por 2 rondas.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Castigos Brutales', text: 'Paga la próxima ronda de cervezas o la cena de todo el grupo.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Castigos Brutales', text: 'Siéntate en el suelo y no vuelvas a la silla hasta que acabe la partida.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Castigos Brutales', text: 'Pierdes el derecho a usar las manos para beber. Usa solo la boca.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Castigos Brutales', text: 'El Mudo: Si hablas en los próximos 10 minutos, bebes un vaso entero.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Castigos Brutales', text: 'Intercambia tu bebida con el peor brebaje o mezcla que haya en la mesa.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Castigos Brutales', text: 'Quítate una prenda de ropa cada vez que alguien saque un bloque de color verde.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Castigos Brutales', text: 'No puedes ir al baño bajo ningún concepto hasta que termine la partida.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Castigos Brutales', text: 'Debes beber un trago cada vez que digas el nombre de cualquier persona.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Castigos Brutales', text: 'Bebe un chupito de vinagre de cocina ahora mismo.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Castigos Brutales', text: 'Esclavo de la silla: Tienes que pedir permiso formal para sentarte si te levantas.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Castigos Brutales', text: 'Si alguien saca un bloque rojo, tú bebes el doble automáticamente.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Castigos Brutales', text: 'Elige a alguien; esa persona tiene control total de tu móvil durante 5 minutos.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Castigos Brutales', text: 'Bebe un trago por cada año de edad que tengas.', border: 'neon-border-pink', glow: 'glow-pink' },
-            { color: 'rosa', cat: 'Castigos Brutales', text: 'Ruleta de Ropa: El grupo elige una prenda tuya que debes quitarte ahora mismo.', border: 'neon-border-pink', glow: 'glow-pink' }
+            // NARANJA (ANTES ROSA)
+            { color: 'naranja', cat: 'Castigos Brutales', text: 'Objetivo: Cualquier trago que alguien deba tomar, puede pasártelo a ti por 2 rondas.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Castigos Brutales', text: 'Paga la próxima ronda de cervezas o la cena de todo el grupo.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Castigos Brutales', text: 'Siéntate en el suelo y no vuelvas a la silla hasta que acabe la partida.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Castigos Brutales', text: 'Pierdes el derecho a usar las manos para beber. Usa solo la boca.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Castigos Brutales', text: 'El Mudo: Si hablas en los próximos 10 minutos, bebes un vaso entero.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Castigos Brutales', text: 'Intercambia tu bebida con el peor brebaje o mezcla que haya en la mesa.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Castigos Brutales', text: 'Quítate una prenda de ropa cada vez que alguien saque un bloque de color verde.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Castigos Brutales', text: 'No puedes ir al baño bajo ningún concepto hasta que termine la partida.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Castigos Brutales', text: 'Debes beber un trago cada vez que digas el nombre de cualquier persona.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Castigos Brutales', text: 'Bebe un chupito de vinagre de cocina ahora mismo.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Castigos Brutales', text: 'Esclavo de la silla: Tienes que pedir permiso formal para sentarte si te levantas.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Castigos Brutales', text: 'Si alguien saca un bloque rojo, tú bebes el doble automáticamente.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Castigos Brutales', text: 'Elige a alguien; esa persona tiene control total de tu móvil durante 5 minutos.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Castigos Brutales', text: 'Bebe un trago por cada año de edad que tengas.', border: 'neon-border-orange', glow: 'glow-orange' },
+            { color: 'naranja', cat: 'Castigos Brutales', text: 'Ruleta de Ropa: El grupo elige una prenda tuya que debes quitarte ahora mismo.', border: 'neon-border-orange', glow: 'glow-orange' }
         ];
 
         // Estado Actual
@@ -946,13 +946,13 @@
             if (currentTheme === 'couples') {
                 currentTheme = 'friends';
                 textSpan.innerText = 'MODO AMIGOS';
-                btn.className = "relative flex items-center justify-center gap-3 px-8 py-3 rounded-full text-sm font-bold uppercase tracking-widest transition-all duration-300 w-full md:w-auto border border-[#00ccff] text-[#00ccff] shadow-[0_0_15px_rgba(0,204,255,0.2)] hover:shadow-[0_0_25px_rgba(0,204,255,0.5)] bg-black/50 backdrop-blur-sm group";
-                dotSpan.className = "w-2 h-2 rounded-full bg-[#00ccff] shadow-[0_0_8px_#00ccff] animate-pulse";
+                btn.className = "relative flex items-center justify-center gap-3 px-8 py-3 rounded-full text-sm font-bold uppercase tracking-widest transition-all duration-300 w-full md:w-auto border border-[#00aa44] text-[#00aa44] shadow-[0_0_15px_rgba(0,170,68,0.2)] hover:shadow-[0_0_25px_rgba(0,170,68,0.5)] bg-black/50 backdrop-blur-sm group";
+                dotSpan.className = "w-2 h-2 rounded-full bg-[#00aa44] shadow-[0_0_8px_#00aa44] animate-pulse";
             } else {
                 currentTheme = 'couples';
                 textSpan.innerText = 'MODO PAREJAS';
-                btn.className = "relative flex items-center justify-center gap-3 px-8 py-3 rounded-full text-sm font-bold uppercase tracking-widest transition-all duration-300 w-full md:w-auto border border-[#ff00cc] text-[#ff00cc] shadow-[0_0_15px_rgba(255,0,204,0.2)] hover:shadow-[0_0_25px_rgba(255,0,204,0.5)] bg-black/50 backdrop-blur-sm group";
-                dotSpan.className = "w-2 h-2 rounded-full bg-[#ff00cc] shadow-[0_0_8px_#ff00cc] animate-pulse";
+                btn.className = "relative flex items-center justify-center gap-3 px-8 py-3 rounded-full text-sm font-bold uppercase tracking-widest transition-all duration-300 w-full md:w-auto border border-[#ff8800] text-[#ff8800] shadow-[0_0_15px_rgba(255,136,0,0.2)] hover:shadow-[0_0_25px_rgba(255,136,0,0.5)] bg-black/50 backdrop-blur-sm group";
+                dotSpan.className = "w-2 h-2 rounded-full bg-[#ff8800] shadow-[0_0_8px_#ff8800] animate-pulse";
             }
             updateData();
         }
@@ -1071,7 +1071,7 @@
             if (players.length === 0) {
                 list.innerHTML = '<span class="text-gray-600 text-sm italic">Añade nombres para habilitar los turnos...</span>';
                 turnDisplay.innerHTML = '---';
-                turnDisplay.classList.remove('text-[#00ccff]', 'drop-shadow-[0_0_10px_rgba(0,204,255,0.8)]');
+                turnDisplay.classList.remove('text-[#00aa44]', 'drop-shadow-[0_0_10px_rgba(0,170,68,0.8)]');
                 turnDisplay.classList.add('text-gray-600');
                 skipBtn.classList.add('hidden');
                 return;
@@ -1080,7 +1080,7 @@
             list.innerHTML = '';
             players.forEach((p, index) => {
                 const isActive = index === currentPlayerIndex;
-                const activeClass = isActive ? 'border-[#00ccff] bg-[#00ccff]/20 shadow-[0_0_8px_rgba(0,204,255,0.4)]' : 'border-gray-700 bg-gray-800';
+                const activeClass = isActive ? 'border-[#00aa44] bg-[#00aa44]/20 shadow-[0_0_8px_rgba(0,170,68,0.4)]' : 'border-gray-700 bg-gray-800';
                 list.innerHTML += `
                     <div class="flex items-center gap-1 ${activeClass} border px-3 py-1 rounded-md transition-all">
                         <span class="text-white text-xs font-bold uppercase tracking-wider">${p}</span>
@@ -1093,7 +1093,7 @@
             const currentPlayer = players[currentPlayerIndex];
             turnDisplay.innerHTML = currentPlayer;
             turnDisplay.classList.remove('text-gray-600');
-            turnDisplay.classList.add('text-[#00ccff]', 'drop-shadow-[0_0_10px_rgba(0,204,255,0.8)]');
+            turnDisplay.classList.add('text-[#00aa44]', 'drop-shadow-[0_0_10px_rgba(0,170,68,0.8)]');
             skipBtn.classList.remove('hidden');
         }
 
@@ -1184,7 +1184,7 @@
             textEl.innerHTML = personalized.newText;
 
             if (personalized.active) {
-                activePlayerEl.innerHTML = `¡Te toca, <span class="text-[#00ccff] drop-shadow-[0_0_10px_rgba(0,204,255,0.8)]">${personalized.active}</span>!`;
+                activePlayerEl.innerHTML = `¡Te toca, <span class="text-[#00aa44] drop-shadow-[0_0_10px_rgba(0,170,68,0.8)]">${personalized.active}</span>!`;
                 activePlayerEl.classList.remove('hidden');
             }
             
@@ -1211,22 +1211,22 @@
         }
 
         // =================================================================================
-        // TEMPORIZADOR NEON
+        // TEMPORIZADOR NEON (FLOTANTE EN SEGUNDO PLANO)
         // =================================================================================
         function startTimer() {
-            const modal = document.getElementById('timer-modal');
+            const timerUI = document.getElementById('floating-timer');
             const display = document.getElementById('timer-display');
             const progress = document.getElementById('timer-progress');
             
-            modal.style.display = 'flex';
-            setTimeout(() => modal.style.opacity = '1', 10);
+            // Mostrar widget deslizando hacia arriba
+            timerUI.classList.remove('translate-y-[200%]', 'opacity-0');
             
             let timeLeft = currentTimerSeconds;
             display.innerText = timeLeft;
             progress.style.strokeDashoffset = '0';
             progress.style.transition = 'stroke-dashoffset 1s linear';
             
-            const circumference = 2 * Math.PI * 110; // r=110 -> ~691
+            const circumference = 2 * Math.PI * 50; // radio=50 -> ~314
 
             clearInterval(timerInterval);
             timerInterval = setInterval(() => {
@@ -1239,7 +1239,7 @@
                 if (timeLeft <= 0) {
                     clearInterval(timerInterval);
                     SFX.playAlarm(); // Sonido de alarma
-                    display.innerText = "¡TIEMPO!";
+                    display.innerText = "0";
                     progress.style.transition = 'none';
                     progress.style.strokeDashoffset = '0';
                     progress.style.stroke = '#ff0055'; // Cambia a rojo al terminar
@@ -1249,12 +1249,12 @@
 
         function closeTimer() {
             clearInterval(timerInterval);
-            const modal = document.getElementById('timer-modal');
-            modal.style.opacity = '0';
+            const timerUI = document.getElementById('floating-timer');
+            // Ocultar widget
+            timerUI.classList.add('translate-y-[200%]', 'opacity-0');
             setTimeout(() => {
-                modal.style.display = 'none';
                 document.getElementById('timer-progress').style.stroke = '#ffcc00'; // reset color
-            }, 300);
+            }, 500);
         }
 
         function fireParticles(color) {
@@ -1306,9 +1306,9 @@
                 { id: 'rojo', name: redName, hex: '#ff0055' },
                 { id: 'amarillo', name: 'Amarillo: Mental & Trivia', hex: '#ffcc00' },
                 { id: 'verde', name: 'Verde: Acción & Diversión', hex: '#33ff00' },
-                { id: 'azul', name: 'Azul: Confesiones', hex: '#00ccff' },
+                { id: 'verde_oscuro', name: 'Verde Oscuro: Confesiones', hex: '#00aa44' },
                 { id: 'morado', name: purpleName, hex: '#cc00ff' },
-                { id: 'rosa', name: 'Rosa: Sorpresas y Castigos', hex: '#ff00cc' }
+                { id: 'naranja', name: 'Naranja: Sorpresas y Castigos', hex: '#ff8800' }
             ];
 
             const pdfStyles = `
